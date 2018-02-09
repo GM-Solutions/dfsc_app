@@ -1,0 +1,250 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:navigationIcon="@drawable/ic_back"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextAppearance="@style/Toolbar.TitleText">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Customer Registration"
+                    style="@style/Toolbar.TitleText"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"/>
+
+                <ImageView
+                    android:id="@+id/flag"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:src="@mipmap/ic_launcher" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16"
+            android:background="@drawable/white_border"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:gravity="center_vertical"
+                android:hint="Search Chassis.."
+                android:padding="@dimen/dp_8"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_18" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/black" />
+
+            <ImageButton
+                android:id="@+id/search_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/dp_5"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/dp_5"
+                android:src="@drawable/ic_search" />
+        </LinearLayout>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/searchError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="3dp"
+            android:paddingLeft="@dimen/dp_5"
+            android:text=""
+            android:textColor="#FF0000" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:gravity="left"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="Customer Registration"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/sa_mobile"
+            style="@android:style/Widget.Holo.Light.Spinner"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/spinnerError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="3dp"
+            android:textColor="#FF0000"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/id_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16">
+
+            <EditText
+                android:id="@+id/et_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint=""
+                android:inputType="text"
+                android:padding="@dimen/dp_10"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sp_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/name_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16">
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Customer Name"
+                android:inputType="text"
+                android:padding="@dimen/dp_10"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sp_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/cc_input_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/dp_70">
+
+                <EditText
+                    android:enabled="false"
+                    android:id="@+id/et_cc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Code"
+                    android:inputType="number"
+                    android:padding="@dimen/dp_10"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/sp_16" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/phone_input_layout"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Customer Mobile Number"
+                    android:inputType="number"
+                    android:padding="@dimen/dp_10"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/sp_16" />
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/date_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16">
+
+            <EditText
+                android:id="@+id/et_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Product Purchase Date"
+                android:inputType="none"
+                android:padding="@dimen/dp_10"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sp_16"
+                android:focusableInTouchMode="false" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:minHeight="@dimen/dp_45"
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@drawable/roundedview"
+            android:paddingLeft="@dimen/dp_45"
+            android:paddingRight="@dimen/dp_45"
+            android:text="SUBMIT"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18" />
+
+    </LinearLayout>
+
+</ScrollView>

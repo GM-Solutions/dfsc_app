@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/dp_50"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_16"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:gravity="left"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="Login"
+            android:textColor="#000000"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+        <Spinner
+        android:id="@+id/country"
+        style="@android:style/Widget.Holo.Light.Spinner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_16"
+        android:spinnerMode="dropdown" />
+
+        <TextView
+            android:id="@+id/country_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_2"
+            android:paddingLeft="@dimen/dp_5"
+            android:text="Please select country"
+            android:textColor="#FF0000"
+            android:visibility="gone" />
+
+        <Spinner
+            android:id="@+id/role"
+            style="@android:style/Widget.Holo.Light.Spinner"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:id="@+id/role_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_2"
+            android:paddingLeft="@dimen/dp_5"
+            android:text="Please select your role"
+            android:textColor="#FF0000"
+            android:visibility="gone" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/userName_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16">
+
+            <EditText
+                android:id="@+id/et_userName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="User Name"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/dp_10"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sp_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/mobile_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16">
+
+            <EditText
+                android:id="@+id/et_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mobile Number"
+                android:inputType="number"
+                android:padding="@dimen/dp_10"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sp_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/otp_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/et_otp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter OTP"
+                android:inputType="number"
+                android:padding="@dimen/dp_10"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sp_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:minHeight="@dimen/dp_45"
+            android:id="@+id/getOTP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:background="@drawable/roundedview"
+            android:paddingLeft="@dimen/dp_45"
+            android:paddingRight="@dimen/dp_45"
+            android:text="GET OTP"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18" />
+
+        <Button
+            android:minHeight="@dimen/dp_45"
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:background="@drawable/roundedview"
+            android:paddingLeft="@dimen/dp_45"
+            android:paddingRight="@dimen/dp_45"
+            android:text="LOGIN"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</ScrollView>

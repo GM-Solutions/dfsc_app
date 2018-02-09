@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_user"
+        android:title="Profile" />
+
+    <item
+        android:id="@+id/ascRegistration"
+        android:icon="@drawable/ic_asc"
+        android:title="ASC Registration" />
+
+    <item
+        android:id="@+id/saRegistration"
+        android:icon="@drawable/ic_sa"
+        android:title="Sercice Advisor Registration" />
+
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_logout"
+        android:title="Logout" />
+-->
+</menu>

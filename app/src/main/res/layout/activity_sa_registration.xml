@@ -1,0 +1,179 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:navigationIcon="@drawable/ic_back"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextAppearance="@style/Toolbar.TitleText">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SA Registration"
+                    style="@style/Toolbar.TitleText"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"/>
+
+                <ImageView
+                    android:id="@+id/flag"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:src="@mipmap/ic_launcher" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16"
+            android:background="@drawable/white_border"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:gravity="center_vertical"
+                android:hint="SA Mobile Search.."
+                android:padding="@dimen/dp_8"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_18" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/black" />
+
+            <ImageButton
+                android:id="@+id/search_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/dp_5"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/dp_5"
+                android:src="@drawable/ic_search" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:gravity="left"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="Service Advisor Registration"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/saId_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16">
+
+            <EditText
+                android:id="@+id/et_saId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Service Advisor ID"
+                android:inputType="text"
+                android:padding="@dimen/dp_10"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sp_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/saNmae_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16">
+
+            <EditText
+                android:id="@+id/et_saName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Service Advisor Name"
+                android:inputType="text"
+                android:padding="@dimen/dp_10"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sp_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/saMobile_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16">
+
+            <EditText
+                android:id="@+id/et_saMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Service Advisor Mobile"
+                android:inputType="text"
+                android:padding="@dimen/dp_10"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sp_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/filter"
+            style="@android:style/Widget.Holo.Light.Spinner"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:spinnerMode="dropdown" />
+
+        <Button
+            android:id="@+id/getOTP"
+            android:minHeight="@dimen/dp_45"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@drawable/roundedview"
+            android:paddingLeft="@dimen/dp_45"
+            android:paddingRight="@dimen/dp_45"
+            android:text="SUBMIT"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18" />
+
+    </LinearLayout>
+
+</ScrollView>

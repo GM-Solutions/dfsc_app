@@ -1,0 +1,121 @@
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:navigationIcon="@drawable/ic_back"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextAppearance="@style/Toolbar.TitleText" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Close Free Service"
+                    style="@style/Toolbar.TitleText"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"/>
+
+                <ImageView
+                    android:id="@+id/flag"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_16"
+                    android:src="@mipmap/ic_launcher" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <Spinner
+            android:id="@+id/sa_mobile"
+            style="@android:style/Widget.Holo.Light.Spinner"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/spinnerError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="3dp"
+            android:paddingLeft="@dimen/dp_5"
+            android:textColor="#FF0000" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/custId_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <EditText
+                android:id="@+id/et_custId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Customer ID*"
+                android:inputType="text"
+                android:padding="@dimen/dp_10"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sp_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/ucn_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <EditText
+                android:id="@+id/et_ucn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="UCN*"
+                android:inputType="text"
+                android:padding="@dimen/dp_10"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sp_16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:minHeight="@dimen/dp_45"
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:background="@drawable/roundedview"
+            android:paddingLeft="@dimen/dp_45"
+            android:paddingRight="@dimen/dp_45"
+            android:text="SUBMIT"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18" />
+
+    </LinearLayout>
+
+</ScrollView>
