@@ -39,6 +39,15 @@ public class AppPreferences {
         prefsEditor.commit();
     }
 
+    public String getShouldLogin() {
+        return appSharedPrefs.getString("LOGIN", " ");
+    }
+
+    public void setShouldLogin(String text) {
+        prefsEditor.putString("LOGIN", text);
+        prefsEditor.commit();
+    }
+
     public String getEmail() {
         return appSharedPrefs.getString("email", " ");
     }

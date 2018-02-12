@@ -356,6 +356,7 @@ public class Login extends AppCompatActivity {
 
         if (Utilities.checkNetworkConnection(getApplicationContext())) {
             if (et_otp.getText().toString().trim().matches(otp)) {
+                appPrefs.setShouldLogin("true");
                 appPrefs.setMobile(et_mobile.getText().toString().trim());
                 startActivity(new Intent(Login.this, Drawer.class));
                 finish();

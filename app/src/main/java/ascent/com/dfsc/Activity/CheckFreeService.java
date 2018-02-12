@@ -400,7 +400,7 @@ public class CheckFreeService extends AppCompatActivity {
                 params.put("service_type",typeee);
 
                 if(!(appPrefs.getCountry().matches("india"))){
-                    params.put("veh_reg_no",veh_reg_no);
+                    params.put("veh_reg_no",et_veh_reg_no.getText().toString().trim());
                 }
 
                 Log.e("params",new JSONObject(params).toString());

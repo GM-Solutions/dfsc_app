@@ -33,12 +33,17 @@ public class Splash extends AppCompatActivity {
             public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
 
-                if(appPreferences.getUserId().trim().isEmpty()){
+                if(appPreferences.getShouldLogin().trim().isEmpty()){
+                    appPreferences.RemoveAllSharedPreference();
                     Intent mainIntent = new Intent(Splash.this,Login.class);
                     Splash.this.startActivity(mainIntent);
                     Splash.this.finish();
-                }else{
+                }else if(appPreferences.getShouldLogin().trim().matches("true")){
                     Intent mainIntent = new Intent(Splash.this,Drawer.class);
+                    Splash.this.startActivity(mainIntent);
+                    Splash.this.finish();
+                }else{
+                    Intent mainIntent = new Intent(Splash.this,Login.class);
                     Splash.this.startActivity(mainIntent);
                     Splash.this.finish();
                 }
