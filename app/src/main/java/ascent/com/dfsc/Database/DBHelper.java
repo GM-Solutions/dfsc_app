@@ -21,7 +21,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private HashMap hp;
     boolean bol = false;
-    String givengift = "";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -43,14 +42,14 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // TODO Auto-generated method stub
-        db.execSQL("DROP TABLE IF EXISTS cart");
+        db.execSQL("DROP TABLE IF EXISTS resource");
         onCreate(db);
     }
 
     public void deleteDb() {
         SQLiteDatabase db = this.getWritableDatabase();
         //db.execSQL("delete from cart");
-        db.execSQL("DELETE FROM cart"); //delete all rows in a table
+        db.execSQL("DELETE FROM resource"); //delete all rows in a table
         db.close();
     }
 
