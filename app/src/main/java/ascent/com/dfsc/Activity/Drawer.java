@@ -136,6 +136,11 @@ public class Drawer extends AppCompatActivity {
                     }
 
                 } else if (id == sideMenu.length() + 1) {
+
+                        Utilities.showLanguageDialog(Drawer.this);
+
+
+                }else if (id == sideMenu.length() + 2) {
                     AlertDialog.Builder builder =
                             new AlertDialog.Builder(Drawer.this, R.style.AppCompatAlertDialogStyle);
                     builder.setTitle(Html.fromHtml("<b>Logout</b>"));
@@ -192,7 +197,8 @@ public class Drawer extends AppCompatActivity {
                 //menu.add(0, 3, Menu.FIRST + 3, "Logout").setIcon(R.drawable.ic_logout);
             }
 
-            menu.add(0, sideMenu.length() + 1, sideMenu.length() + 1, "Logout").setIcon(R.drawable.ic_logout);
+            menu.add(0, sideMenu.length() + 1, sideMenu.length() + 1, "Change Language").setIcon(R.drawable.ic_translation);
+            menu.add(0, sideMenu.length() + 2, sideMenu.length() + 2, "Logout").setIcon(R.drawable.ic_logout);
 
 
         } catch (JSONException e) {
@@ -200,7 +206,6 @@ public class Drawer extends AppCompatActivity {
         }
 
     }
-
 
     @Override
     public void onBackPressed() {

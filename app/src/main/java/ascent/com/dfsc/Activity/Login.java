@@ -494,12 +494,14 @@ public class Login extends AppCompatActivity {
 
                                 appPrefs.setSideMenu(obj.getJSONObject("menu").getJSONArray("side_menu"));
                                 appPrefs.setDashboard(obj.getJSONObject("menu").getJSONArray("dashboard"));
+                                //appPrefs.setLanguage(obj.getJSONObject("menu").getJSONArray("languages"));
 
                                 Toast.makeText(Login.this, "Reading OTP, Please wait..", Toast.LENGTH_LONG).show();
 
                                 Log.e("menu", appPrefs.getSideMenu());
                                 Log.e("menu", appPrefs.getDashboard());
                                 Log.e("group", appPrefs.getGroup());
+                                Log.e("languages", appPrefs.getGroup());
 
                                 Mint.initAndStartSession(getApplication(), "3e402768");
                                 Mint.setUserIdentifier(obj.getString("user_id"));

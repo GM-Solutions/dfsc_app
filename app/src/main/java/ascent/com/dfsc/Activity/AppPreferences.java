@@ -48,6 +48,15 @@ public class AppPreferences {
         prefsEditor.commit();
     }
 
+    public String getLanguageSelected() {
+        return appSharedPrefs.getString("lang_selected", " ");
+    }
+
+    public void setLanguageSelected(String text) {
+        prefsEditor.putString("lang_selected", text);
+        prefsEditor.commit();
+    }
+
     public String getEmail() {
         return appSharedPrefs.getString("email", " ");
     }
@@ -122,6 +131,15 @@ public class AppPreferences {
 
     public void setSideMenu(JSONArray userObject){
         prefsEditor.putString("side_menu", String.valueOf(userObject));
+        prefsEditor.commit();
+    }
+
+    public String getLanguage(){
+        return  appSharedPrefs.getString("languages", null);
+    }
+
+    public void setLanguage(JSONArray userObject){
+        prefsEditor.putString("languages", String.valueOf(userObject));
         prefsEditor.commit();
     }
 

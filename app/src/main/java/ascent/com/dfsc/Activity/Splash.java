@@ -1,10 +1,9 @@
 package ascent.com.dfsc.Activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -25,25 +24,30 @@ public class Splash extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
-        appPreferences=new AppPreferences(Splash.this);
+        appPreferences = new AppPreferences(Splash.this);
         Mint.initAndStartSession(this.getApplication(), "3e402768");
 
-        new Handler().postDelayed(new Runnable(){
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
 
-                if(appPreferences.getShouldLogin().trim().isEmpty()){
+                if (appPreferences.getShouldLogin().trim().isEmpty()) {
                     appPreferences.RemoveAllSharedPreference();
-                    Intent mainIntent = new Intent(Splash.this,Login.class);
+                    Intent mainIntent = new Intent(Splash.this, Login.class);
                     Splash.this.startActivity(mainIntent);
                     Splash.this.finish();
-                }else if(appPreferences.getShouldLogin().trim().matches("true")){
-                    Intent mainIntent = new Intent(Splash.this,Drawer.class);
-                    Splash.this.startActivity(mainIntent);
-                    Splash.this.finish();
-                }else{
-                    Intent mainIntent = new Intent(Splash.this,Login.class);
+                } else if (appPreferences.getShouldLogin().trim().matches("true")) {
+                    if (!(appPreferences.getLanguageSelected().trim().isEmpty())) {
+                        //appPreferences.RemoveAllSharedPreference();
+                        Intent mainIntent = new Intent(Splash.this, Drawer.class);
+                        Splash.this.startActivity(mainIntent);
+                        Splash.this.finish();
+                    } else {
+                        Utilities.showLanguageDialog(Splash.this);
+                    }
+                } else {
+                    Intent mainIntent = new Intent(Splash.this, Login.class);
                     Splash.this.startActivity(mainIntent);
                     Splash.this.finish();
                 }
