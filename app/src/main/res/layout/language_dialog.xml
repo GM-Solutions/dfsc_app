@@ -43,7 +43,7 @@
         android:paddingRight="@dimen/dp_35"
         android:paddingTop="@dimen/dp_5"
         android:paddingBottom="@dimen/dp_5"
-        android:text="Submit"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="20sp" />
 

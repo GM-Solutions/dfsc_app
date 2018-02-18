@@ -45,8 +45,8 @@ import ascent.com.dfsc.R;
 public class SearchCustomerDetails extends AppCompatActivity {
 
     Toolbar toolbar;
-    TextView chassis_number, cust_id, cust_name, cust_no,veh_no,colon,textVehNo;
-    EditText search,cc;
+    TextView chassis_number, cust_id, cust_name, cust_no, veh_no, colon, textVehNo, mobile_head, name_head, id_head, chassis_head;
+    EditText search, cc;
     ImageButton search_bt;
     Spinner filter;
     private ProgressDialog dialog;
@@ -55,8 +55,8 @@ public class SearchCustomerDetails extends AppCompatActivity {
     Button checkFreeService, custReg;
     LinearLayout ll1;
     CardView searchResult;
-    TextView searchError;
-    String intent_name,intent_mobile,intent_veh_no;
+    TextView searchError,toolbar_text;
+    String intent_name, intent_mobile, intent_veh_no;
     ImageView flag;
 
     @Override
@@ -72,12 +72,15 @@ public class SearchCustomerDetails extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Search Customer Details");
+        getSupportActionBar().setTitle(getResources().getString(R.string.search_page_head));
+
+        toolbar_text=(TextView)findViewById(R.id.toolbar_text);
+        toolbar_text.setText(getResources().getString(R.string.search_page_head));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        flag=(ImageView)findViewById(R.id.flag);
+        flag = (ImageView) findViewById(R.id.flag);
         Picasso.with(SearchCustomerDetails.this).load(appPrefs.getFlag()).into(flag);
 
         searchResult = (CardView) findViewById(R.id.searchResult);
@@ -90,14 +93,25 @@ public class SearchCustomerDetails extends AppCompatActivity {
         veh_no = (TextView) findViewById(R.id.veh_no);
         colon = (TextView) findViewById(R.id.colon);
         textVehNo = (TextView) findViewById(R.id.textVehNo);
+        mobile_head = (TextView) findViewById(R.id.mobile_head);
+        name_head = (TextView) findViewById(R.id.name_head);
+        id_head = (TextView) findViewById(R.id.id_head);
+        chassis_head = (TextView) findViewById(R.id.chassis_head);
 
-        searchError=(TextView)findViewById(R.id.searchError) ;
+        chassis_head.setText(getResources().getString(R.string.chassis_head));
+        id_head.setText(getResources().getString(R.string.id_head));
+        name_head.setText(getResources().getString(R.string.name_head));
+        mobile_head.setText(getResources().getString(R.string.mobile_head));
+        textVehNo.setText(getResources().getString(R.string.textVehNo));
+
+        searchError = (TextView) findViewById(R.id.searchError);
         searchError.setVisibility(View.GONE);
 
         ll1 = (LinearLayout) findViewById(R.id.ll1);
         ll1.setVisibility(View.GONE);
 
         search = (EditText) findViewById(R.id.search);
+        search.setHint(getResources().getString(R.string.search));
         cc = (EditText) findViewById(R.id.cc);
 
         search_bt = (ImageButton) findViewById(R.id.search_bt);
@@ -111,7 +125,7 @@ public class SearchCustomerDetails extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 Filters selected = (Filters) arg0.getAdapter().getItem(arg2);
                 filter_sel = selected.id;
-                if(filter_sel.matches("mobile_no")){
+                if (filter_sel.matches("mobile_no")) {
                     cc.setVisibility(View.VISIBLE);
                     cc.setEnabled(false);
 
@@ -126,7 +140,7 @@ public class SearchCustomerDetails extends AppCompatActivity {
                      */
                     cc.setText(appPrefs.getCode());
 
-                }else{
+                } else {
                     cc.setVisibility(View.GONE);
                 }
             }
@@ -140,12 +154,12 @@ public class SearchCustomerDetails extends AppCompatActivity {
         search_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(search.getText().toString().isEmpty()){
-                    searchError.setText("Please enter search string");
+                if (search.getText().toString().isEmpty()) {
+                    searchError.setText(getResources().getString(R.string.validate_search));
                     searchError.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     searchError.setVisibility(View.GONE);
-                    dialog.setMessage("Please Wait..");
+                    dialog.setMessage(getResources().getString(R.string.please_wait));
                     dialog.setCancelable(false);
                     dialog.show();
                     searchCustomer();
@@ -165,7 +179,7 @@ public class SearchCustomerDetails extends AppCompatActivity {
                     intent.putExtra("veh_reg_no", intent_veh_no);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(SearchCustomerDetails.this, "Not Available!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SearchCustomerDetails.this, getResources().getString(R.string.not_available), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -174,18 +188,18 @@ public class SearchCustomerDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (custReg.isEnabled()) {
-                    if(custReg.getText().toString().matches("Customer Registration")){
+                    if (custReg.getText().toString().matches(getResources().getString(R.string.cust_reg))) {
                         Intent intent = new Intent(SearchCustomerDetails.this, CustomerRegistration.class);
                         //intent.putExtra("chassis", chassis_number.getText());
                         startActivity(intent);
-                    }else if(custReg.getText().toString().matches("Rider Registration")){
+                    } else if (custReg.getText().toString().matches(getResources().getString(R.string.rider_reg))) {
                         Intent intent = new Intent(SearchCustomerDetails.this, RiderRegistration.class);
                         intent.putExtra("intent_veh_no", intent_veh_no);
                         startActivity(intent);
                     }
 
                 } else {
-                    Toast.makeText(SearchCustomerDetails.this, "Not Available!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SearchCustomerDetails.this, getResources().getString(R.string.not_available), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -219,23 +233,23 @@ public class SearchCustomerDetails extends AppCompatActivity {
                                 veh_no.setText(arr.getJSONObject(0).getString("veh_reg_no"));
 
                                 //intent_name,intent_mobile,intent_veh_no
-                                intent_name=arr.getJSONObject(0).getString("customer_name");
-                                intent_mobile=arr.getJSONObject(0).getString("mobile_no");
-                                intent_veh_no=arr.getJSONObject(0).getString("veh_reg_no");
+                                intent_name = arr.getJSONObject(0).getString("customer_name");
+                                intent_mobile = arr.getJSONObject(0).getString("mobile_no");
+                                intent_veh_no = arr.getJSONObject(0).getString("veh_reg_no");
 
                                 ll1.setVisibility(View.VISIBLE);
                                 searchResult.setVisibility(View.VISIBLE);
 
-                                if(!(appPrefs.getCountry().matches("india"))){
+                                if (!(appPrefs.getCountry().matches("india"))) {
                                     if (arr.getJSONObject(0).getString("register_customer").matches("true")) {
-                                        custReg.setText("Customer Registration");
+                                        custReg.setText(getResources().getString(R.string.cust_reg));
                                         custReg.setEnabled(true);
-                                        GradientDrawable bgShape = (GradientDrawable)custReg.getBackground();
+                                        GradientDrawable bgShape = (GradientDrawable) custReg.getBackground();
                                         bgShape.setColor(Color.parseColor("#003763"));
                                     } else {
-                                        custReg.setText("Rider Registration");
+                                        custReg.setText(getResources().getString(R.string.rider_reg));
                                         custReg.setEnabled(true);
-                                        GradientDrawable bgShape = (GradientDrawable)custReg.getBackground();
+                                        GradientDrawable bgShape = (GradientDrawable) custReg.getBackground();
                                         bgShape.setColor(Color.parseColor("#003763"));
                                     }
 
@@ -243,16 +257,16 @@ public class SearchCustomerDetails extends AppCompatActivity {
                                     colon.setVisibility(View.GONE);
                                     textVehNo.setVisibility(View.GONE);
 
-                                }else{
+                                } else {
                                     if (arr.getJSONObject(0).getString("register_customer").matches("true")) {
-                                        custReg.setText("Customer Registration");
+                                        custReg.setText(getResources().getString(R.string.cust_reg));
                                         custReg.setEnabled(true);
-                                        GradientDrawable bgShape = (GradientDrawable)custReg.getBackground();
+                                        GradientDrawable bgShape = (GradientDrawable) custReg.getBackground();
                                         bgShape.setColor(Color.parseColor("#003763"));
                                     } else {
-                                        custReg.setText("Customer Registration");
+                                        custReg.setText(getResources().getString(R.string.cust_reg));
                                         custReg.setEnabled(false);
-                                        GradientDrawable bgShape = (GradientDrawable)custReg.getBackground();
+                                        GradientDrawable bgShape = (GradientDrawable) custReg.getBackground();
                                         bgShape.setColor(Color.parseColor("#717171"));
                                     }
 
@@ -267,11 +281,11 @@ public class SearchCustomerDetails extends AppCompatActivity {
 
                                 if (arr.getJSONObject(0).getJSONObject("service_detail").getString("service_status").matches("true")) {
                                     checkFreeService.setEnabled(true);
-                                    GradientDrawable bgShape = (GradientDrawable)checkFreeService.getBackground();
+                                    GradientDrawable bgShape = (GradientDrawable) checkFreeService.getBackground();
                                     bgShape.setColor(Color.parseColor("#003763"));
                                 } else {
                                     checkFreeService.setEnabled(false);
-                                    GradientDrawable bgShape = (GradientDrawable)checkFreeService.getBackground();
+                                    GradientDrawable bgShape = (GradientDrawable) checkFreeService.getBackground();
                                     bgShape.setColor(Color.parseColor("#717171"));
                                 }
 
@@ -329,10 +343,10 @@ public class SearchCustomerDetails extends AppCompatActivity {
 
     private void getSearchFilter() {
         final ArrayList<Filters> list = new ArrayList<Filters>();
-        list.add(new Filters("chassis", "Chassis"));
-        list.add(new Filters("veh_reg_no", "Vehicle-No"));
-        list.add(new Filters("customer_id", "Customer-ID"));
-        list.add(new Filters("mobile_no", "Customer-Mobile"));
+        list.add(new Filters("chassis", getResources().getString(R.string.chassis)));
+        list.add(new Filters("veh_reg_no", getResources().getString(R.string.vehicle_no)));
+        list.add(new Filters("customer_id", getResources().getString(R.string.cust_id)));
+        list.add(new Filters("mobile_no", getResources().getString(R.string.cust_mobile)));
         ArrayAdapter<Filters> adapter = new ArrayAdapter<Filters>(SearchCustomerDetails.this,
                 R.layout.list_item, R.id.name, list);
         filter.setAdapter(adapter);

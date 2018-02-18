@@ -18,12 +18,13 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/toolbar_text"
+                style="@style/Toolbar.TitleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Service Status"
-                style="@style/Toolbar.TitleText"
                 android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:text="Service Status" />
 
             <ImageView
                 android:id="@+id/flag"
@@ -47,7 +48,6 @@
         android:orientation="horizontal">
 
         <EditText
-            android:visibility="gone"
             android:id="@+id/cc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,7 +58,8 @@
             android:minWidth="80dp"
             android:padding="@dimen/dp_8"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/search"
@@ -90,7 +91,6 @@
     </LinearLayout>
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/searchError"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -99,7 +99,8 @@
         android:layout_marginTop="3dp"
         android:paddingLeft="@dimen/dp_5"
         android:text=""
-        android:textColor="#FF0000" />
+        android:textColor="#FF0000"
+        android:visibility="gone" />
 
     <Spinner
         android:id="@+id/filter"
@@ -133,27 +134,33 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/chassis_head"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     android:text="Chassis Number"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/id_head"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     android:text="Customer ID"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/vehicle_head"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     android:text="Vehicle Reg. No."
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -169,21 +176,21 @@
                     android:layout_height="wrap_content"
                     android:text=":"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=":"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=":"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="17sp" />
 
             </LinearLayout>
 
@@ -197,25 +204,28 @@
                     android:id="@+id/chassis_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     android:text=""
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/cust_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     android:text=""
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/veh_reg_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     android:text=""
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="17sp" />
 
             </LinearLayout>
 

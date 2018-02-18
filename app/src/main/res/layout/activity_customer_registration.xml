@@ -22,6 +22,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/toolbar_text"
                     style="@style/Toolbar.TitleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -58,7 +59,7 @@
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:gravity="center_vertical"
-                android:hint="Search Chassis.."
+                android:hint=""
                 android:padding="@dimen/dp_8"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
@@ -92,13 +93,14 @@
             android:visibility="gone" />
 
         <TextView
+            android:id="@+id/head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_20"
             android:gravity="left"
             android:paddingLeft="@dimen/dp_10"
-            android:text="Customer Registration"
+            android:text=""
             android:textColor="@color/colorPrimary"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -154,7 +156,7 @@
                 android:id="@+id/et_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Customer Name"
+                android:hint=""
                 android:inputType="text"
                 android:padding="@dimen/dp_10"
                 android:textColor="@color/colorPrimary"
@@ -180,7 +182,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
-                    android:hint="Code"
+                    android:hint=""
                     android:inputType="number"
                     android:padding="@dimen/dp_10"
                     android:textColor="@color/colorPrimary"
@@ -197,7 +199,7 @@
                     android:id="@+id/et_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Customer Mobile Number"
+                    android:hint=""
                     android:inputType="number"
                     android:padding="@dimen/dp_10"
                     android:textColor="@color/colorPrimary"
@@ -219,7 +221,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="false"
-                android:hint="Product Purchase Date"
+                android:hint=""
                 android:inputType="none"
                 android:padding="@dimen/dp_10"
                 android:textColor="@color/colorPrimary"
@@ -240,7 +242,7 @@
             android:paddingLeft="@dimen/dp_45"
             android:paddingRight="@dimen/dp_45"
             android:paddingTop="@dimen/dp_5"
-            android:text="SUBMIT"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="20sp" />
 

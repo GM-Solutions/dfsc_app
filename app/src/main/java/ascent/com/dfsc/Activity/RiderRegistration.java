@@ -51,7 +51,7 @@ public class RiderRegistration extends AppCompatActivity {
     private ProgressDialog dialog;
     protected AppPreferences appPrefs;
     Spinner sa_mobile;
-    TextView spinnerError;
+    TextView spinnerError,toolbar_text;
     String mobile_sel;
     Button submit;
     String intent_veh_no, menu_name;
@@ -83,6 +83,9 @@ public class RiderRegistration extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Rider Registeration");
 
+        toolbar_text=(TextView)findViewById(R.id.toolbar_text);
+        toolbar_text.setText(getResources().getString(R.string.rider_reg_head));
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -97,6 +100,10 @@ public class RiderRegistration extends AppCompatActivity {
         et_phone = (EditText) findViewById(R.id.et_phone);
         et_cc = (EditText) findViewById(R.id.et_cc);
 
+        et_name.setHint(getResources().getString(R.string.rider_name));
+        et_phone.setHint(getResources().getString(R.string.rider_mobile));
+        et_cc.setHint(getResources().getString(R.string.code));
+
         id_input_layout = (TextInputLayout) findViewById(R.id.id_input_layout);
         name_input_layout = (TextInputLayout) findViewById(R.id.name_input_layout);
         phone_input_layout = (TextInputLayout) findViewById(R.id.phone_input_layout);
@@ -105,16 +112,17 @@ public class RiderRegistration extends AppCompatActivity {
         et_id.setText(intent_veh_no);
 
         submit = (Button) findViewById(R.id.submit);
+        submit.setText(getResources().getString(R.string.submit));
         spinnerError = (TextView) findViewById(R.id.spinnerError);
 
         GradientDrawable bgShape = (GradientDrawable)submit.getBackground();
         bgShape.setColor(Color.parseColor("#003763"));
 
         if (appPrefs.getCountry().matches("india")) {
-            id_input_layout.setHint("Customer ID");
+            id_input_layout.setHint(getResources().getString(R.string.id_head));
             et_phone.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
         } else {
-            id_input_layout.setHint("Vehicle Registration Number");
+            id_input_layout.setHint(getResources().getString(R.string.textVehNo));
             et_phone.setFilters(new InputFilter[]{new InputFilter.LengthFilter(12)});
         }
 
@@ -173,13 +181,13 @@ public class RiderRegistration extends AppCompatActivity {
 
 
         if (Utilities.checkNetworkConnection(RiderRegistration.this)) {
-            dialog.setMessage("Please Wait..");
+            dialog.setMessage(getResources().getString(R.string.please_wait));
             dialog.setCancelable(false);
             dialog.show();
             rider_reg();
 
         } else {
-            Toast.makeText(RiderRegistration.this, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RiderRegistration.this, getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -187,7 +195,7 @@ public class RiderRegistration extends AppCompatActivity {
     private boolean validateMobile() {
         if (mobile_sel.trim().isEmpty()) {
             spinnerError.setVisibility(View.VISIBLE);
-            spinnerError.setText("Select Mobile Number");
+            spinnerError.setText(getResources().getString(R.string.select_mobile_number));
             return false;
         } else {
             spinnerError.setVisibility(View.GONE);
@@ -199,9 +207,9 @@ public class RiderRegistration extends AppCompatActivity {
     private boolean validateId() {
         if (et_id.getText().toString().trim().isEmpty()) {
             if (appPrefs.getCountry().matches("india")) {
-                id_input_layout.setError("Enter Chassis number");
+                id_input_layout.setError(getResources().getString(R.string.enter_chassis));
             } else {
-                id_input_layout.setError("Enter Vehicle Registration number");
+                id_input_layout.setError(getResources().getString(R.string.enter_vrn));
             }
             return false;
         } else {
@@ -213,7 +221,7 @@ public class RiderRegistration extends AppCompatActivity {
 
     private boolean validateName() {
         if (et_name.getText().toString().trim().isEmpty()) {
-            name_input_layout.setError("Enter name");
+            name_input_layout.setError(getResources().getString(R.string.enter_name));
             return false;
         } else {
             name_input_layout.setErrorEnabled(false);
@@ -225,20 +233,20 @@ public class RiderRegistration extends AppCompatActivity {
     private boolean validateOMobile() {
         if (appPrefs.getCountry().matches("india")) {
             if (et_phone.getText().toString().trim().isEmpty()) {
-                phone_input_layout.setError("Enter mobile number");
+                phone_input_layout.setError(getResources().getString(R.string.enter_mob_no));
                 return false;
             } else if (et_phone.getText().length() != 10) {
-                phone_input_layout.setError("Please enter valid 10-digit mobile number");
+                phone_input_layout.setError(getResources().getString(R.string.validate_mob_no));
                 return false;
             } else {
                 phone_input_layout.setErrorEnabled(false);
             }
         } else {
             if (et_phone.getText().toString().trim().isEmpty()) {
-                phone_input_layout.setError("Enter mobile number");
+                phone_input_layout.setError(getResources().getString(R.string.enter_mob_no));
                 return false;
             } else if (et_phone.getText().length() != 9) {
-                phone_input_layout.setError("Please enter valid 9-digit mobile number");
+                phone_input_layout.setError(getResources().getString(R.string.validate_mob_no1));
                 return false;
             } else {
                 phone_input_layout.setErrorEnabled(false);
@@ -262,7 +270,7 @@ public class RiderRegistration extends AppCompatActivity {
                             JSONArray arr = obj.getJSONArray("employee_dtl");
 
                             final ArrayList<Mobile> list = new ArrayList<Mobile>();
-                            list.add(new Mobile("Select mobile number", "", "Select mobile number"));
+                            list.add(new Mobile("Select mobile number", "", getResources().getString(R.string.select_mobile_number)));
                             for (int i = 0; i < arr.length(); i++) {
                                 list.add(new Mobile(arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname")
                                         , arr.getJSONObject(i).getString("mobile_no"),
@@ -339,9 +347,9 @@ public class RiderRegistration extends AppCompatActivity {
 
                                 AlertDialog.Builder builder =
                                         new AlertDialog.Builder(RiderRegistration.this, R.style.AppCompatAlertDialogStyle);
-                                builder.setTitle(Html.fromHtml("<b>Rider Registration Successfull</b>"));
+                                builder.setTitle(Html.fromHtml(getResources().getString(R.string.rider_success_dialog)));
                                 builder.setMessage(obj.getString("message"));
-                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                builder.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         finish();
@@ -353,9 +361,9 @@ public class RiderRegistration extends AppCompatActivity {
                             } else {
                                 AlertDialog.Builder builder =
                                         new AlertDialog.Builder(RiderRegistration.this, R.style.AppCompatAlertDialogStyle);
-                                builder.setTitle(Html.fromHtml("<b>Rider Registration Failed</b>"));
+                                builder.setTitle(Html.fromHtml(getResources().getString(R.string.rider_failure_dialog)));
                                 builder.setMessage(obj.getString("message"));
-                                builder.setPositiveButton("OK", null);
+                                builder.setPositiveButton(getResources().getString(R.string.ok), null);
                                 //builder.setNegativeButton("Cancel", null);
                                 builder.show();
                                 //Toast.makeText(CustomerRegistration.this, obj.getString("message"), Toast.LENGTH_LONG).show();

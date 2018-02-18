@@ -1,12 +1,11 @@
 package ascent.com.dfsc.Activity;
 
 import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +18,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.splunk.mint.Mint;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
@@ -34,7 +32,8 @@ public class MyProfile extends AppCompatActivity {
     Toolbar toolbar;
     private ProgressDialog dialog;
     protected AppPreferences appPrefs;
-    TextView name,username,designation,email,mobile;
+    TextView name, username, designation, email, mobile, toolbar_text;
+    TextView name_head, username_head, designation_head, email_head, mobile_head;
     ImageView flag;
 
     @Override
@@ -44,31 +43,46 @@ public class MyProfile extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("My Profile");
+        getSupportActionBar().setTitle(getResources().getString(R.string.my_profile));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        toolbar_text=(TextView)findViewById(R.id.toolbar_text);
+        toolbar_text.setText(getResources().getString(R.string.my_profile));
+
         dialog = new ProgressDialog(MyProfile.this);
         appPrefs = new AppPreferences(MyProfile.this);
 
-        name=(TextView)findViewById(R.id.name);
-        username=(TextView)findViewById(R.id.username);
-        designation=(TextView)findViewById(R.id.designation);
-        email=(TextView)findViewById(R.id.email);
-        mobile=(TextView)findViewById(R.id.mobile);
+        name = (TextView) findViewById(R.id.name);
+        username = (TextView) findViewById(R.id.username);
+        designation = (TextView) findViewById(R.id.designation);
+        email = (TextView) findViewById(R.id.email);
+        mobile = (TextView) findViewById(R.id.mobile);
 
-        flag=(ImageView)findViewById(R.id.flag);
+        name_head = (TextView) findViewById(R.id.name_head);
+        username_head = (TextView) findViewById(R.id.username_head);
+        designation_head = (TextView) findViewById(R.id.designation_head);
+        email_head = (TextView) findViewById(R.id.email_head);
+        mobile_head = (TextView) findViewById(R.id.mobile_head);
+
+        name_head.setText(getResources().getString(R.string.name));
+        username_head.setText(getResources().getString(R.string.username));
+        designation_head.setText(getResources().getString(R.string.designation));
+        email_head.setText(getResources().getString(R.string.email));
+        mobile_head.setText(getResources().getString(R.string.mobile));
+
+        flag = (ImageView) findViewById(R.id.flag);
         Picasso.with(MyProfile.this).load(appPrefs.getFlag()).into(flag);
 
         if (Utilities.checkNetworkConnection(getApplicationContext())) {
-            dialog.setMessage("Please Wait..");
+            dialog.setMessage(getResources().getString(R.string.please_wait));
             dialog.setCancelable(false);
             dialog.show();
             getProfile();
 
         } else {
-            Toast.makeText(MyProfile.this, "Please check your internet connection.", Toast.LENGTH_LONG).show();
+            Toast.makeText(MyProfile.this, getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
         }
 
     }
@@ -119,7 +133,7 @@ public class MyProfile extends AppCompatActivity {
 
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("country", appPrefs.getCountry());
-                params.put("user_id",appPrefs.getUserId());
+                params.put("user_id", appPrefs.getUserId());
                 params.put("group", appPrefs.getGroup());
                 return new JSONObject(params).toString().getBytes();
             }

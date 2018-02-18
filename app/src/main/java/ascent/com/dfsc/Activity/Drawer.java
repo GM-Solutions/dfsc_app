@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -60,7 +62,7 @@ public class Drawer extends AppCompatActivity {
     ImageView flagg;
 
     DBHelper mydb;
-    int flag=0;
+    int flag = 0;
     LanguageGetSet selected;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +73,7 @@ public class Drawer extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         appPrefs = new AppPreferences(Drawer.this);
-        flagg=(ImageView)findViewById(R.id.flag);
+        flagg = (ImageView) findViewById(R.id.flag);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
@@ -111,9 +113,9 @@ public class Drawer extends AppCompatActivity {
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setItemIconTintList(null);
         View header = navigationView.inflateHeaderView(R.layout.nav_header);
-        TextView name=(TextView)header.findViewById(R.id.name);
+        TextView name = (TextView) header.findViewById(R.id.name);
         name.setText(appPrefs.getUsername());
-        TextView email=(TextView)header.findViewById(R.id.email);
+        TextView email = (TextView) header.findViewById(R.id.email);
         email.setText(appPrefs.getEmail());
 
         getMenu();
@@ -132,26 +134,26 @@ public class Drawer extends AppCompatActivity {
                     if (Utilities.checkNetworkConnection(Drawer.this)) {
                         startActivity(new Intent(Drawer.this, MyProfile.class));
                     } else {
-                        Toast.makeText(Drawer.this, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Drawer.this, getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 } else if (id == 101) {
                     if (Utilities.checkNetworkConnection(Drawer.this)) {
                         startActivity(new Intent(Drawer.this, AscRegistration.class));
                     } else {
-                        Toast.makeText(Drawer.this, "No Internet available!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Drawer.this, getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
                     }
 
                 } else if (id == 100) {
                     if (Utilities.checkNetworkConnection(Drawer.this)) {
                         startActivity(new Intent(Drawer.this, SaRegistration.class));
                     } else {
-                        Toast.makeText(Drawer.this, "No Internet available!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Drawer.this, getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
                     }
 
                 } else if (id == sideMenu.length() + 1) {
 
-                        //Utilities.showLanguageDialog(Drawer.this);
+                    //Utilities.showLanguageDialog(Drawer.this);
                     try {
 
                         mydb = new DBHelper(Drawer.this);
@@ -166,7 +168,7 @@ public class Drawer extends AppCompatActivity {
                         dialog.setContentView(R.layout.language_dialog);
 
                         Spinner language = (Spinner) dialog.findViewById(R.id.language);
-                        list.add(new LanguageGetSet("123", "Please Select Language"));
+                        list.add(new LanguageGetSet("123", getResources().getString(R.string.select_lang)));
                         for (int i = 0; i < languages.length(); i++) {
                             list.add(new LanguageGetSet(languages.getJSONObject(i).getString("id"), languages.getJSONObject(i).getString("value")));
                         }
@@ -194,6 +196,10 @@ public class Drawer extends AppCompatActivity {
                         dialog.show();
 
                         Button submit = (Button) dialog.findViewById(R.id.submit);
+                        submit.setText(getResources().getString(R.string.submit));
+                        GradientDrawable bgShape = (GradientDrawable) submit.getBackground();
+                        bgShape.setColor(Color.parseColor("#003763"));
+
                         submit.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -204,10 +210,6 @@ public class Drawer extends AppCompatActivity {
                                     LocaleHelper.setLocale(Drawer.this, selected.id);
                                     recreate();
 
-                                    Toast.makeText(Drawer.this, "Selected", Toast.LENGTH_SHORT).show();
-
-                                } else {
-                                    Toast.makeText(Drawer.this, "Not Selected", Toast.LENGTH_SHORT).show();
                                 }
 
                             }
@@ -217,23 +219,23 @@ public class Drawer extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                }else if (id == sideMenu.length() + 2) {
+                } else if (id == sideMenu.length() + 2) {
                     AlertDialog.Builder builder =
                             new AlertDialog.Builder(Drawer.this, R.style.AppCompatAlertDialogStyle);
-                    builder.setTitle(Html.fromHtml("<b>Logout</b>"));
-                    builder.setMessage("Are you sure you want to logout?");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    builder.setTitle(Html.fromHtml(getResources().getString(R.string.logout_head)));
+                    builder.setMessage(getResources().getString(R.string.logout_msg));
+                    builder.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             appPrefs.RemoveAllSharedPreference();
-                            Toast.makeText(Drawer.this, "Logout successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Drawer.this, getResources().getString(R.string.logout_success), Toast.LENGTH_SHORT).show();
                             Intent mainIntent = new Intent(Drawer.this, Login.class);
                             startActivity(mainIntent);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                             finish();
                         }
                     });
-                    builder.setNegativeButton("Cancel", null);
+                    builder.setNegativeButton(getResources().getString(R.string.cancel), null);
                     builder.show();
                 }
 
@@ -251,7 +253,7 @@ public class Drawer extends AppCompatActivity {
         try {
             sideMenu = new JSONArray(appPrefs.getSideMenu());
 
-            menu.add(0, 0, Menu.FIRST, "My Profile").setIcon(R.drawable.ic_user);
+            menu.add(0, 0, Menu.FIRST, getResources().getString(R.string.my_profile)).setIcon(R.drawable.ic_user);
 
             for (int i = 0; i < sideMenu.length(); i++) {
 
@@ -263,7 +265,7 @@ public class Drawer extends AppCompatActivity {
                     menu.add(0, 101,
                             Menu.FIRST + i + 1, sideMenu.getJSONObject(i).getString("value"))
                             .setIcon(R.drawable.ic_asc);
-                }else{
+                } else {
                     menu.add(0, 500,
                             Menu.FIRST + i + 1, sideMenu.getJSONObject(i).getString("value"))
                             .setIcon(R.drawable.ic_default);
@@ -274,8 +276,8 @@ public class Drawer extends AppCompatActivity {
                 //menu.add(0, 3, Menu.FIRST + 3, "Logout").setIcon(R.drawable.ic_logout);
             }
 
-            menu.add(0, sideMenu.length() + 1, sideMenu.length() + 1, "Change Language").setIcon(R.drawable.ic_translation);
-            menu.add(0, sideMenu.length() + 2, sideMenu.length() + 2, "Logout").setIcon(R.drawable.ic_logout);
+            menu.add(0, sideMenu.length() + 1, sideMenu.length() + 1, getResources().getString(R.string.change_lang)).setIcon(R.drawable.ic_translation);
+            menu.add(0, sideMenu.length() + 2, sideMenu.length() + 2, getResources().getString(R.string.logout)).setIcon(R.drawable.ic_logout);
 
 
         } catch (JSONException e) {
@@ -307,15 +309,15 @@ public class Drawer extends AppCompatActivity {
 
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(Drawer.this, R.style.AppCompatAlertDialogStyle);
-        builder.setTitle(Html.fromHtml("<b>Exit DFSC</b>"));
-        builder.setMessage("Are you sure you want to Exit?");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setTitle(Html.fromHtml(getResources().getString(R.string.exit_dfsc)));
+        builder.setMessage(getResources().getString(R.string.exit_msg));
+        builder.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 finish();
             }
         });
-        builder.setNegativeButton("Cancel", null);
+        builder.setNegativeButton(getResources().getString(R.string.cancel), null);
         builder.show();
     }
 }

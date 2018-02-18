@@ -58,7 +58,7 @@ public class CustomerRegistration extends AppCompatActivity {
     Button submit;
     private ProgressDialog dialog;
     protected AppPreferences appPrefs;
-    TextView searchError, spinnerError;
+    TextView searchError, spinnerError,head,toolbar_text;
     Spinner sa_mobile;
     String mobile_sel, search_filter, menu_name;
     int month, year, day;
@@ -77,7 +77,10 @@ public class CustomerRegistration extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Customer Registeration");
+        getSupportActionBar().setTitle(getResources().getString(R.string.cust_reg_head));
+
+        toolbar_text=(TextView)findViewById(R.id.toolbar_text);
+        toolbar_text.setText(getResources().getString(R.string.cust_reg_head));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -96,6 +99,9 @@ public class CustomerRegistration extends AppCompatActivity {
 
         search = (EditText) findViewById(R.id.search);
 
+        head = (TextView) findViewById(R.id.head);
+        head.setText(getResources().getString(R.string.cust_reg_head));
+
         searchError = (TextView) findViewById(R.id.searchError);
         searchError.setVisibility(View.GONE);
         spinnerError = (TextView) findViewById(R.id.spinnerError);
@@ -107,6 +113,11 @@ public class CustomerRegistration extends AppCompatActivity {
         et_cc = (EditText) findViewById(R.id.et_cc);
         et_date = (EditText) findViewById(R.id.et_date);
 
+        et_name.setHint(getResources().getString(R.string.name_head));
+        et_phone.setHint(getResources().getString(R.string.mobile_head));
+        et_cc.setHint(getResources().getString(R.string.code));
+        et_date.setHint(getResources().getString(R.string.ppd));
+
         search_bt = (ImageButton) findViewById(R.id.search_bt);
 
         id_input_layout = (TextInputLayout) findViewById(R.id.id_input_layout);
@@ -116,15 +127,17 @@ public class CustomerRegistration extends AppCompatActivity {
         date_input_layout = (TextInputLayout) findViewById(R.id.date_input_layout);
 
         submit = (Button) findViewById(R.id.submit);
+        submit.setText(getResources().getString(R.string.submit));
+
         sa_mobile = (Spinner) findViewById(R.id.sa_mobile);
 
         if (appPrefs.getCountry().matches("india")) {
-            search.setHint("Search Chassis..");
-            id_input_layout.setHint("Customer ID");
+            search.setHint(getResources().getString(R.string.search_chassis));
+            et_id.setHint(getResources().getString(R.string.chassis_head));
             search_filter = "chassis";
             sa_mobile.setVisibility(View.GONE);
             mobile_sel = "";
-            id_input_layout.setHint("Chassis Number");
+            //id_input_layout.setHint(getResources().getString(R.string.chassis_head));
             et_phone.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
 
             //et_cc.setText("+91");
@@ -132,13 +145,13 @@ public class CustomerRegistration extends AppCompatActivity {
 
         } else {
 
-            search.setHint("Search Vehicle No..");
-            id_input_layout.setHint("Vehicle Registration Number");
+            search.setHint(getResources().getString(R.string.search_vehNo));
+            et_id.setHint(getResources().getString(R.string.textVehNo));
             search_filter = "veh_reg_no";
             sa_mobile.setVisibility(View.VISIBLE);
-            id_input_layout.setHint("Vehicle Registration Number");
+            //id_input_layout.setHint("Vehicle Registration Number");
             et_phone.setFilters(new InputFilter[]{new InputFilter.LengthFilter(12)});
-            dialog.setMessage("Please Wait..");
+            dialog.setMessage(getResources().getString(R.string.please_wait));
             dialog.setCancelable(false);
             dialog.show();
             getSAMobile();
@@ -148,11 +161,11 @@ public class CustomerRegistration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (search.getText().toString().isEmpty()) {
-                    searchError.setText("Please enter search string");
+                    searchError.setText(getResources().getString(R.string.validate_search));
                     searchError.setVisibility(View.VISIBLE);
                 } else {
                     searchError.setVisibility(View.GONE);
-                    dialog.setMessage("Please Wait..");
+                    dialog.setMessage(getResources().getString(R.string.please_wait));
                     dialog.setCancelable(false);
                     dialog.show();
                     searchCustomer();
@@ -210,7 +223,7 @@ public class CustomerRegistration extends AppCompatActivity {
 
                 DatePickerDialog dpd = new DatePickerDialog(CustomerRegistration.this, date, year, month, day);
                 dpd.getDatePicker().setMinDate(c.getTimeInMillis());
-                dpd.setTitle("Select Product Purchase Date");
+                dpd.setTitle(getResources().getString(R.string.select_date_head));
                 dpd.show();
             }
         });
@@ -274,12 +287,12 @@ public class CustomerRegistration extends AppCompatActivity {
 
 
         if (Utilities.checkNetworkConnection(CustomerRegistration.this)) {
-            dialog.setMessage("Please Wait..");
+            dialog.setMessage(getResources().getString(R.string.please_wait));
             dialog.setCancelable(false);
             dialog.show();
             cust_reg();
         } else {
-            Toast.makeText(CustomerRegistration.this, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CustomerRegistration.this, getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -287,7 +300,7 @@ public class CustomerRegistration extends AppCompatActivity {
     private boolean validateMobile() {
         if (mobile_sel.trim().isEmpty()) {
             spinnerError.setVisibility(View.VISIBLE);
-            spinnerError.setText("Select Mobile Number");
+            spinnerError.setText(getResources().getString(R.string.select_mobile_number));
             return false;
         } else {
             spinnerError.setVisibility(View.GONE);
@@ -299,9 +312,9 @@ public class CustomerRegistration extends AppCompatActivity {
     private boolean validateId() {
         if (et_id.getText().toString().trim().isEmpty()) {
             if (appPrefs.getCountry().matches("india")) {
-                id_input_layout.setError("Enter Chassis number");
+                id_input_layout.setError(getResources().getString(R.string.enter_chassis));
             } else {
-                id_input_layout.setError("Enter Vehicle Registration number");
+                id_input_layout.setError(getResources().getString(R.string.enter_vrn));
             }
             return false;
         } else {
@@ -313,7 +326,7 @@ public class CustomerRegistration extends AppCompatActivity {
 
     private boolean validateName() {
         if (et_name.getText().toString().trim().isEmpty()) {
-            name_input_layout.setError("Enter name");
+            name_input_layout.setError(getResources().getString(R.string.enter_name));
             return false;
         } else {
             name_input_layout.setErrorEnabled(false);
@@ -325,20 +338,20 @@ public class CustomerRegistration extends AppCompatActivity {
     private boolean validateOMobile() {
         if (appPrefs.getCountry().matches("india")) {
             if (et_phone.getText().toString().trim().isEmpty()) {
-                phone_input_layout.setError("Enter mobile number");
+                phone_input_layout.setError(getResources().getString(R.string.enter_mob_no));
                 return false;
             } else if (et_phone.getText().length() != 10) {
-                phone_input_layout.setError("Please enter valid 10-digit mobile number");
+                phone_input_layout.setError(getResources().getString(R.string.validate_mob_no));
                 return false;
             } else {
                 phone_input_layout.setErrorEnabled(false);
             }
         } else {
             if (et_phone.getText().toString().trim().isEmpty()) {
-                phone_input_layout.setError("Enter mobile number");
+                phone_input_layout.setError(getResources().getString(R.string.enter_mob_no));
                 return false;
             } else if (et_phone.getText().length() != 9) {
-                phone_input_layout.setError("Please enter valid 9-digit mobile number");
+                phone_input_layout.setError(getResources().getString(R.string.validate_mob_no1));
                 return false;
             } else {
                 phone_input_layout.setErrorEnabled(false);
@@ -351,7 +364,7 @@ public class CustomerRegistration extends AppCompatActivity {
 
     private boolean validateDate() {
         if (et_date.getText().toString().trim().isEmpty()) {
-            date_input_layout.setError("Enter product purchase date");
+            date_input_layout.setError(getResources().getString(R.string.validate_date));
             return false;
         } else {
             date_input_layout.setErrorEnabled(false);
@@ -520,7 +533,7 @@ public class CustomerRegistration extends AppCompatActivity {
                             JSONArray arr = obj.getJSONArray("employee_dtl");
 
                             final ArrayList<Mobile> list = new ArrayList<Mobile>();
-                            list.add(new Mobile("Select mobile number", "", "Select mobile number"));
+                            list.add(new Mobile("Select mobile number", "", getResources().getString(R.string.select_mobile_number)));
                             for (int i = 0; i < arr.length(); i++) {
                                 list.add(new Mobile(arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname")
                                         , arr.getJSONObject(i).getString("mobile_no"),
@@ -597,9 +610,9 @@ public class CustomerRegistration extends AppCompatActivity {
 
                                 AlertDialog.Builder builder =
                                         new AlertDialog.Builder(CustomerRegistration.this, R.style.AppCompatAlertDialogStyle);
-                                builder.setTitle(Html.fromHtml("<b>Customer Registration Successfull</b>"));
+                                builder.setTitle(Html.fromHtml(getResources().getString(R.string.cust_success_dialog)));
                                 builder.setMessage(obj.getString("message"));
-                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                builder.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         finish();
@@ -611,9 +624,9 @@ public class CustomerRegistration extends AppCompatActivity {
                             } else {
                                 AlertDialog.Builder builder =
                                         new AlertDialog.Builder(CustomerRegistration.this, R.style.AppCompatAlertDialogStyle);
-                                builder.setTitle(Html.fromHtml("<b>Customer Registration Failed</b>"));
+                                builder.setTitle(Html.fromHtml(getResources().getString(R.string.cust_failure_dialog)));
                                 builder.setMessage(obj.getString("message"));
-                                builder.setPositiveButton("OK", null);
+                                builder.setPositiveButton(getResources().getString(R.string.ok), null);
                                 //builder.setNegativeButton("Cancel", null);
                                 builder.show();
                                 //Toast.makeText(CustomerRegistration.this, obj.getString("message"), Toast.LENGTH_LONG).show();

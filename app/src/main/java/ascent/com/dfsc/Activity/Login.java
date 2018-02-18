@@ -2,6 +2,7 @@ package ascent.com.dfsc.Activity;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -96,6 +97,7 @@ public class Login extends AppCompatActivity {
         appPrefs = new AppPreferences(Login.this);
 
         changeLang=(TextView)findViewById(R.id.changeLang);
+        changeLang.setText(getResources().getString(R.string.change_lang));
         changeLang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +116,7 @@ public class Login extends AppCompatActivity {
                     dialog.setContentView(R.layout.language_dialog);
 
                     Spinner language = (Spinner) dialog.findViewById(R.id.language);
-                    list.add(new LanguageGetSet("123", "Please Select Language"));
+                    list.add(new LanguageGetSet("123", getResources().getString(R.string.select_lang)));
                     for (int i = 0; i < languages.length(); i++) {
                         list.add(new LanguageGetSet(languages.getJSONObject(i).getString("id"), languages.getJSONObject(i).getString("value")));
                     }
@@ -142,6 +144,7 @@ public class Login extends AppCompatActivity {
                     dialog.show();
 
                     Button submit = (Button) dialog.findViewById(R.id.submit);
+                    submit.setText(getResources().getString(R.string.submit));
                     submit.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -440,6 +443,11 @@ public class Login extends AppCompatActivity {
             code = m.group(0);
         }
         return code;
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
     }
 
     private void checkOtp() {

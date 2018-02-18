@@ -2,8 +2,6 @@ package ascent.com.dfsc.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -50,7 +48,7 @@ import ascent.com.dfsc.R;
 public class ServiceStatus extends AppCompatActivity {
 
     Toolbar toolbar;
-    EditText search,cc;
+    EditText search, cc;
     ImageButton search_bt;
     Spinner filter;
     private ProgressDialog dialog;
@@ -59,8 +57,8 @@ public class ServiceStatus extends AppCompatActivity {
     RecyclerView statusList;
     LinearLayoutManager LayoutManager;
     RecyclerVerticalAdapter verticalAdapter;
-    TextView searchError;
-    TextView chassis_number, cust_id,veh_reg_no;
+    TextView searchError,toolbar_text;
+    TextView chassis_number, cust_id, veh_reg_no,chassis_head,id_head,vehicle_head;
     CardView searchResult;
     ImageView flag;
 
@@ -78,12 +76,15 @@ public class ServiceStatus extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Service Status");
+        getSupportActionBar().setTitle(getResources().getString(R.string.service_status_head));
+
+        toolbar_text=(TextView)findViewById(R.id.toolbar_text);
+        toolbar_text.setText(getResources().getString(R.string.service_status_head));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        flag=(ImageView)findViewById(R.id.flag);
+        flag = (ImageView) findViewById(R.id.flag);
         Picasso.with(ServiceStatus.this).load(appPrefs.getFlag()).into(flag);
 
         searchResult = (CardView) findViewById(R.id.searchResult);
@@ -92,27 +93,35 @@ public class ServiceStatus extends AppCompatActivity {
         chassis_number = (TextView) findViewById(R.id.chassis_number);
         cust_id = (TextView) findViewById(R.id.cust_id);
         veh_reg_no = (TextView) findViewById(R.id.veh_reg_no);
+        chassis_head = (TextView) findViewById(R.id.chassis_head);
+        id_head = (TextView) findViewById(R.id.id_head);
+        vehicle_head = (TextView) findViewById(R.id.vehicle_head);
+
+        chassis_head.setText(getResources().getString(R.string.chassis_head));
+        id_head.setText(getResources().getString(R.string.id_head));
+        vehicle_head.setText(getResources().getString(R.string.textVehNo));
 
         statusList = (RecyclerView) findViewById(R.id.statusList);
         statusList.setVisibility(View.GONE);
         LayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
 
         search = (EditText) findViewById(R.id.search);
+        search.setHint(getResources().getString(R.string.search));
         cc = (EditText) findViewById(R.id.cc);
 
-        searchError=(TextView)findViewById(R.id.searchError);
+        searchError = (TextView) findViewById(R.id.searchError);
         searchError.setVisibility(View.GONE);
-        
+
         search_bt = (ImageButton) findViewById(R.id.search_bt);
         search_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(search.getText().toString().isEmpty()){
-                    searchError.setText("Please enter search string");
+                if (search.getText().toString().isEmpty()) {
+                    searchError.setText(getResources().getString(R.string.validate_search));
                     searchError.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     searchError.setVisibility(View.GONE);
-                    dialog.setMessage("Please Wait..");
+                    dialog.setMessage(getResources().getString(R.string.please_wait));
                     dialog.setCancelable(false);
                     dialog.show();
                     search();
@@ -126,7 +135,7 @@ public class ServiceStatus extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 Filters selected = (Filters) arg0.getAdapter().getItem(arg2);
                 filter_sel = selected.id;
-                if(filter_sel.matches("mobile_no")){
+                if (filter_sel.matches("mobile_no")) {
                     cc.setVisibility(View.VISIBLE);
                     cc.setEnabled(false);
 
@@ -141,7 +150,7 @@ public class ServiceStatus extends AppCompatActivity {
                      */
                     cc.setText(appPrefs.getCode());
 
-                }else{
+                } else {
                     cc.setVisibility(View.GONE);
                 }
             }
@@ -181,7 +190,7 @@ public class ServiceStatus extends AppCompatActivity {
                                 cust_id.setText(arr.getJSONObject(0).getString("customer_id"));
                                 veh_reg_no.setText(arr.getJSONObject(0).getString("veh_reg_no"));
 
-                                JSONArray arr1=arr.getJSONObject(0).getJSONArray("coupon");
+                                JSONArray arr1 = arr.getJSONObject(0).getJSONArray("coupon");
                                 List<Servicestatus> data = new ArrayList<>();
                                 for (int i = 0; i < arr1.length(); i++) {
                                     //job_id, title,status,customer,description,start_date,end_date,services,alloted
@@ -247,10 +256,10 @@ public class ServiceStatus extends AppCompatActivity {
 
     private void getSearchFilter() {
         final ArrayList<Filters> list = new ArrayList<Filters>();
-        list.add(new Filters("chassis", "Chassis"));
-        list.add(new Filters("veh_reg_no", "Vehicle-No"));
-        list.add(new Filters("customer_id", "Customer-ID"));
-        list.add(new Filters("mobile_no", "Customer-Mobile"));
+        list.add(new Filters("chassis", getResources().getString(R.string.chassis)));
+        list.add(new Filters("veh_reg_no", getResources().getString(R.string.vehicle_no)));
+        list.add(new Filters("customer_id", getResources().getString(R.string.cust_id)));
+        list.add(new Filters("mobile_no", getResources().getString(R.string.cust_mobile)));
         ArrayAdapter<Filters> adapter = new ArrayAdapter<Filters>(ServiceStatus.this,
                 R.layout.list_item, R.id.name, list);
         filter.setAdapter(adapter);
@@ -303,7 +312,7 @@ public class ServiceStatus extends AppCompatActivity {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
 
-            TextView type, status;
+            TextView type, status, type_head, status_head;
             LinearLayout one;
 
             public MyViewHolder(View view) {
@@ -311,6 +320,8 @@ public class ServiceStatus extends AppCompatActivity {
 
                 type = (TextView) view.findViewById(R.id.type);
                 status = (TextView) view.findViewById(R.id.status);
+                type_head = (TextView) view.findViewById(R.id.type_head);
+                status_head = (TextView) view.findViewById(R.id.status_head);
 
             }
         }
@@ -325,6 +336,8 @@ public class ServiceStatus extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
+            holder.type_head.setText(getResources().getString(R.string.type_head));
+            holder.status_head.setText(getResources().getString(R.string.status_head));
             holder.type.setText(verticalList.get(position).type);
             holder.status.setText(verticalList.get(position).status);
 

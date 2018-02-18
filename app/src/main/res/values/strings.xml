@@ -30,4 +30,93 @@
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
 
+    <!--Search Customer page-->
+    <string name="validate_search">Please enter search string</string>
+    <string name="not_available">Not Available!</string>
+    <string name="search">Search..</string>
+    <string name="chassis_head">Chassis Number</string>
+    <string name="id_head">Customer ID</string>
+    <string name="name_head">Customer Name</string>
+    <string name="mobile_head">Customer Mobile</string>
+    <string name="textVehNo">Vehicle Number</string>
+    <string name="cust_reg">Customer Registration</string>
+    <string name="rider_reg">Rider Registration</string>
+    <string name="search_page_head">Search Customer Details</string>
+
+    <!--Search Filter-->
+    <string name="chassis">Chassis</string>
+    <string name="vehicle_no">Vehicle-No</string>
+    <string name="cust_id">Customer-ID</string>
+    <string name="cust_mobile">Customer-Mobile</string>
+
+    <!--Service Status page-->
+    <string name="service_status_head">Service Status</string>
+    <string name="type_head">Service Type</string>
+    <string name="status_head">Status</string>
+
+    <!--Check Free Service page-->
+    <string name="select_mobile_number">Select mobile number</string>
+    <string name="check_free_page_head">Check For Free Service</string>
+    <string name="validate_cust_id">Enter Customer ID</string>
+    <string name="validate_km">Enter Kilometers</string>
+    <string name="validate_service_type">Enter Service Type</string>
+    <string name="validate_vechicle_no">Enter Vehicle Registration Number</string>
+    <string name="free_service"><b>Free Service</b></string>
+    <string name="validate_mobile_no">Please select mobile number</string>
+    <string name="submit">SUBMIT</string>
+    <string name="kms">KMS*</string>
+    <string name="service_type">Service Type*</string>
+    <string name="cust_idd">Customer ID*</string>
+    <string name="veh_no">Vehicle Registration Number*</string>
+
+    <!--Close Free Service page-->
+    <string name="close_free_page_head">Close Free Service</string>
+    <string name="close_free_service"><b>Close Free Service</b></string>
+    <string name="validate_ucn">Enter UCN</string>
+    <string name="ucn">UCN*</string>
+
+    <!--Customer registration page-->
+    <string name="search_chassis">Search Chassis..</string>
+    <string name="search_vehNo">Search Vehicle No..</string>
+    <string name="cust_reg_head">Customer Registration</string>
+    <string name="select_date_head">Select Product Purchase Date</string>
+    <string name="enter_chassis">Enter Chassis number</string>
+    <string name="enter_vrn">Enter Vehicle Registration number</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="enter_mob_no">Enter mobile number</string>
+    <string name="validate_mob_no">Please enter valid 10-digit mobile number</string>
+    <string name="validate_mob_no1">Please enter valid 9-digit mobile number</string>
+    <string name="validate_date">Enter product purchase date</string>
+    <string name="cust_success_dialog"><b>Customer Registration Successfull</b></string>
+    <string name="cust_failure_dialog"><b>Customer Registration Failed</b></string>
+    <string name="code">Code</string>
+    <string name="ppd">Product Purchase Date</string>
+
+    <!--Rider registration page-->
+    <string name="rider_reg_head">Rider Registration</string>
+    <string name="rider_name">Rider Name</string>
+    <string name="rider_mobile">Rider Mobile Number</string>
+    <string name="rider_success_dialog"><b>Rider Registration Successfull</b></string>
+    <string name="rider_failure_dialog"><b>Rider Registration Failed</b></string>
+
+    <!--my profile-->
+    <string name="name">Name</string>
+    <string name="username">Username</string>
+    <string name="designation">Designation</string>
+    <string name="email">Email address</string>
+    <string name="mobile">Mobile Number</string>
+
+    <!--Menu-->
+    <string name="my_profile">My Profile</string>
+    <string name="logout">Logout</string>
+    <string name="change_lang">Change Language</string>
+
+    <!--Extras-->
+    <string name="select_lang">Please Select Language</string>
+    <string name="logout_head"><b>Logout</b></string>
+    <string name="logout_msg">Are you sure you want to logout?</string>
+    <string name="logout_success">Logout successfully</string>
+    <string name="exit_dfsc"><b>Exit DFSC</b></string>
+    <string name="exit_msg">Are you sure you want to Exit?</string>
+
 </resources>

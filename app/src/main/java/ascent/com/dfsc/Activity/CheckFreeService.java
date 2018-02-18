@@ -2,7 +2,6 @@ package ascent.com.dfsc.Activity;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -46,14 +45,14 @@ import ascent.com.dfsc.R;
 public class CheckFreeService extends AppCompatActivity {
 
     Toolbar toolbar;
-    TextView filterError;
+    TextView filterError,toolbar_text;
     Spinner sa_mobile;
     private ProgressDialog dialog;
     protected AppPreferences appPrefs;
-    String filter_sel, cust_id,menu_name,typeee,veh_reg_no;
+    String filter_sel, cust_id, menu_name, typeee, veh_reg_no;
     Button submit;
-    TextInputLayout custId_input_layout, kms_input_layout,type_input_layout,veh_reg_no_input_layout;
-    EditText et_custId, et_kms,et_type,et_veh_reg_no;
+    TextInputLayout custId_input_layout, kms_input_layout, type_input_layout, veh_reg_no_input_layout;
+    EditText et_custId, et_kms, et_type, et_veh_reg_no;
     ImageView flag;
 
     @Override
@@ -87,11 +86,11 @@ public class CheckFreeService extends AppCompatActivity {
         }
         et_custId.setText(cust_id);
 
-        if(getIntent().getStringExtra("veh_reg_no") != null){
+        if (getIntent().getStringExtra("veh_reg_no") != null) {
             veh_reg_no = getIntent().getStringExtra("veh_reg_no");
             et_veh_reg_no.setEnabled(false);
-        }else{
-            veh_reg_no="";
+        } else {
+            veh_reg_no = "";
             et_veh_reg_no.setEnabled(true);
         }
         et_veh_reg_no.setText(veh_reg_no);
@@ -99,17 +98,21 @@ public class CheckFreeService extends AppCompatActivity {
         dialog = new ProgressDialog(CheckFreeService.this);
         appPrefs = new AppPreferences(CheckFreeService.this);
 
-        flag=(ImageView)findViewById(R.id.flag);
+        flag = (ImageView) findViewById(R.id.flag);
         Picasso.with(CheckFreeService.this).load(appPrefs.getFlag()).into(flag);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Check For Free Service");
+        getSupportActionBar().setTitle(getResources().getString(R.string.check_free_page_head));
+
+        toolbar_text=(TextView)findViewById(R.id.toolbar_text);
+        toolbar_text.setText(getResources().getString(R.string.check_free_page_head));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         filterError = (TextView) findViewById(R.id.filterError);
+        filterError.setText(getResources().getString(R.string.validate_mobile_no));
 
         custId_input_layout = (TextInputLayout) findViewById(R.id.custId_input_layout);
         kms_input_layout = (TextInputLayout) findViewById(R.id.kms_input_layout);
@@ -119,16 +122,22 @@ public class CheckFreeService extends AppCompatActivity {
         et_kms = (EditText) findViewById(R.id.et_kms);
         et_type = (EditText) findViewById(R.id.et_type);
 
-        submit = (Button) findViewById(R.id.submit);
+        et_kms.setHint(getResources().getString(R.string.kms));
+        et_type.setHint(getResources().getString(R.string.service_type));
+        et_custId.setHint(getResources().getString(R.string.cust_idd));
+        et_veh_reg_no.setHint(getResources().getString(R.string.veh_no));
 
-        GradientDrawable bgShape = (GradientDrawable)submit.getBackground();
+        submit = (Button) findViewById(R.id.submit);
+        submit.setText(getResources().getString(R.string.submit));
+
+        GradientDrawable bgShape = (GradientDrawable) submit.getBackground();
         bgShape.setColor(Color.parseColor("#003763"));
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(appPrefs.getCountry().matches("india")){
+                if (appPrefs.getCountry().matches("india")) {
                     if (!validateCustomerId()) {
                         return;
                     }
@@ -137,8 +146,8 @@ public class CheckFreeService extends AppCompatActivity {
                         return;
                     }
 
-                }else{
-                    if(!validateVehRegNo()){
+                } else {
+                    if (!validateVehRegNo()) {
                         return;
                     }
                 }
@@ -153,7 +162,7 @@ public class CheckFreeService extends AppCompatActivity {
 
 
                 if (Utilities.checkNetworkConnection(getApplicationContext())) {
-                    dialog.setMessage("Please Wait..");
+                    dialog.setMessage(getResources().getString(R.string.please_wait));
                     dialog.setCancelable(false);
                     dialog.show();
                     check();
@@ -161,7 +170,7 @@ public class CheckFreeService extends AppCompatActivity {
                     //finish();
 
                 } else {
-                    Toast.makeText(CheckFreeService.this, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CheckFreeService.this,  getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -180,21 +189,21 @@ public class CheckFreeService extends AppCompatActivity {
             }
         });
 
-        if(appPrefs.getCountry().matches("india")){
+        if (appPrefs.getCountry().matches("india")) {
             custId_input_layout.setVisibility(View.VISIBLE);
             type_input_layout.setVisibility(View.VISIBLE);
             veh_reg_no_input_layout.setVisibility(View.GONE);
-            veh_reg_no="";
-        }else{
+            veh_reg_no = "";
+        } else {
             custId_input_layout.setVisibility(View.GONE);
             type_input_layout.setVisibility(View.GONE);
             typeee = "";
-            cust_id="";
+            cust_id = "";
             veh_reg_no_input_layout.setVisibility(View.VISIBLE);
 
         }
 
-        dialog.setMessage("Please Wait..");
+        dialog.setMessage(getResources().getString(R.string.please_wait));
         dialog.setCancelable(false);
         dialog.show();
         getSAMobile();
@@ -213,7 +222,7 @@ public class CheckFreeService extends AppCompatActivity {
 
     private boolean validateCustomerId() {
         if (et_custId.getText().toString().trim().isEmpty()) {
-            custId_input_layout.setError("Enter Customer ID");
+            custId_input_layout.setError(getResources().getString(R.string.validate_cust_id));
             return false;
         } else {
             custId_input_layout.setErrorEnabled(false);
@@ -224,7 +233,7 @@ public class CheckFreeService extends AppCompatActivity {
 
     private boolean validateKms() {
         if (et_kms.getText().toString().trim().isEmpty()) {
-            kms_input_layout.setError("Enter Kilometers");
+            kms_input_layout.setError(getResources().getString(R.string.validate_km));
             return false;
         } else {
             kms_input_layout.setErrorEnabled(false);
@@ -235,7 +244,7 @@ public class CheckFreeService extends AppCompatActivity {
 
     private boolean validateType() {
         if (et_type.getText().toString().trim().isEmpty()) {
-            type_input_layout.setError("Enter Service Type");
+            type_input_layout.setError(getResources().getString(R.string.validate_service_type));
             return false;
         } else {
             type_input_layout.setErrorEnabled(false);
@@ -244,9 +253,9 @@ public class CheckFreeService extends AppCompatActivity {
         return true;
     }
 
-    private  boolean validateVehRegNo(){
+    private boolean validateVehRegNo() {
         if (et_veh_reg_no.getText().toString().trim().isEmpty()) {
-            veh_reg_no_input_layout.setError("Enter Vehicle Registration Number");
+            veh_reg_no_input_layout.setError(getResources().getString(R.string.validate_vechicle_no));
             return false;
         } else {
             veh_reg_no_input_layout.setErrorEnabled(false);
@@ -270,7 +279,7 @@ public class CheckFreeService extends AppCompatActivity {
                             JSONArray arr = obj.getJSONArray("employee_dtl");
 
                             final ArrayList<Mobile> list = new ArrayList<Mobile>();
-                            list.add(new Mobile("Select mobile number", "", "Select mobile number"));
+                            list.add(new Mobile("Select mobile number", "", getResources().getString(R.string.select_mobile_number)));
                             for (int i = 0; i < arr.length(); i++) {
                                 list.add(new Mobile(arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname")
                                         , arr.getJSONObject(i).getString("mobile_no"),
@@ -333,7 +342,7 @@ public class CheckFreeService extends AppCompatActivity {
     }
 
     private void check() {
-        typeee=et_type.getText().toString().trim();
+        typeee = et_type.getText().toString().trim();
 
         String JSON_URL = appPrefs.getURL() + "Transaction/checkCoupon";
         RequestQueue queue = Volley.newRequestQueue(CheckFreeService.this);
@@ -345,13 +354,13 @@ public class CheckFreeService extends AppCompatActivity {
                         dialog.dismiss();
                         try {
                             JSONObject obj = new JSONObject(response);
-                            if(obj.getString("status").matches("true")){
+                            if (obj.getString("status").matches("true")) {
                                 //Toast.makeText(CheckFreeService.this, obj.getString("message"), Toast.LENGTH_LONG).show();
                                 AlertDialog.Builder builder =
                                         new AlertDialog.Builder(CheckFreeService.this, R.style.AppCompatAlertDialogStyle);
-                                builder.setTitle(Html.fromHtml("<b>Free Service</b>"));
+                                builder.setTitle(Html.fromHtml(getResources().getString(R.string.free_service)));
                                 builder.setMessage(obj.getString("message"));
-                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                builder.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         finish();
@@ -359,12 +368,12 @@ public class CheckFreeService extends AppCompatActivity {
                                 });
                                 //builder.setNegativeButton("Cancel", null);
                                 builder.show();
-                            }else{
+                            } else {
                                 AlertDialog.Builder builder =
                                         new AlertDialog.Builder(CheckFreeService.this, R.style.AppCompatAlertDialogStyle);
-                                builder.setTitle(Html.fromHtml("<b>Free Service</b>"));
+                                builder.setTitle(Html.fromHtml(getResources().getString(R.string.free_service)));
                                 builder.setMessage(obj.getString("message"));
-                                builder.setPositiveButton("OK", null);
+                                builder.setPositiveButton(getResources().getString(R.string.ok), null);
                                 //builder.setNegativeButton("Cancel", null);
                                 builder.show();
                                 //Toast.makeText(CheckFreeService.this, obj.getString("message"), Toast.LENGTH_LONG).show();
@@ -374,7 +383,7 @@ public class CheckFreeService extends AppCompatActivity {
 
 
                         } catch (Throwable t) {
-                                Log.e("REsponse", "Could not parse malformed JSON: \"" + response + "\"");
+                            Log.e("REsponse", "Could not parse malformed JSON: \"" + response + "\"");
                         }
 
                     }
@@ -397,13 +406,13 @@ public class CheckFreeService extends AppCompatActivity {
                 params.put("customer_id", et_custId.getText().toString().trim());
                 params.put("km", et_kms.getText().toString().trim());
                 params.put("mobile_no", filter_sel);
-                params.put("service_type",typeee);
+                params.put("service_type", typeee);
 
-                if(!(appPrefs.getCountry().matches("india"))){
-                    params.put("veh_reg_no",et_veh_reg_no.getText().toString().trim());
+                if (!(appPrefs.getCountry().matches("india"))) {
+                    params.put("veh_reg_no", et_veh_reg_no.getText().toString().trim());
                 }
 
-                Log.e("params",new JSONObject(params).toString());
+                Log.e("params", new JSONObject(params).toString());
                 return new JSONObject(params).toString().getBytes();
             }
 

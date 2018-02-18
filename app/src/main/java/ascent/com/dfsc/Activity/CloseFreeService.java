@@ -49,7 +49,7 @@ public class CloseFreeService extends AppCompatActivity {
     private ProgressDialog dialog;
     protected AppPreferences appPrefs;
     String filter_sel, menu_name,id;
-    TextView spinnerError;
+    TextView spinnerError,toolbar_text;
     TextInputLayout ucn_input_layout, custId_input_layout;
     EditText et_ucn, et_custId;
     Button submit;
@@ -80,7 +80,10 @@ public class CloseFreeService extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Close Free Service");
+        getSupportActionBar().setTitle(getResources().getString(R.string.close_free_page_head));
+
+        toolbar_text=(TextView)findViewById(R.id.toolbar_text);
+        toolbar_text.setText(getResources().getString(R.string.close_free_page_head));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -91,6 +94,10 @@ public class CloseFreeService extends AppCompatActivity {
         et_custId = (EditText) findViewById(R.id.et_custId);
         submit = (Button) findViewById(R.id.submit);
         spinnerError = (TextView) findViewById(R.id.spinnerError);
+
+        submit.setText(getResources().getString(R.string.submit));
+        et_ucn.setHint(getResources().getString(R.string.ucn));
+        et_custId.setHint(getResources().getString(R.string.cust_idd));
 
         sa_mobile = (Spinner) findViewById(R.id.sa_mobile);
         sa_mobile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -123,7 +130,7 @@ public class CloseFreeService extends AppCompatActivity {
             id = "";
         }
 
-        dialog.setMessage("Please Wait..");
+        dialog.setMessage(getResources().getString(R.string.please_wait));
         dialog.setCancelable(false);
         dialog.show();
         getSAMobile();
@@ -145,13 +152,13 @@ public class CloseFreeService extends AppCompatActivity {
         }
 
         if (Utilities.checkNetworkConnection(getApplicationContext())) {
-            dialog.setMessage("Please Wait..");
+            dialog.setMessage(getResources().getString(R.string.please_wait));
             dialog.setCancelable(false);
             dialog.show();
             closeService();
 
         } else {
-            Toast.makeText(CloseFreeService.this, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CloseFreeService.this, getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -172,9 +179,9 @@ public class CloseFreeService extends AppCompatActivity {
                                 //Toast.makeText(CheckFreeService.this, obj.getString("message"), Toast.LENGTH_LONG).show();
                                 AlertDialog.Builder builder =
                                         new AlertDialog.Builder(CloseFreeService.this, R.style.AppCompatAlertDialogStyle);
-                                builder.setTitle(Html.fromHtml("<b>Close Free Service</b>"));
+                                builder.setTitle(Html.fromHtml(getResources().getString(R.string.close_free_service)));
                                 builder.setMessage(obj.getString("message"));
-                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                builder.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         finish();
@@ -185,9 +192,9 @@ public class CloseFreeService extends AppCompatActivity {
                             } else {
                                 AlertDialog.Builder builder =
                                         new AlertDialog.Builder(CloseFreeService.this, R.style.AppCompatAlertDialogStyle);
-                                builder.setTitle(Html.fromHtml("<b>Close Free Service</b>"));
+                                builder.setTitle(Html.fromHtml(getResources().getString(R.string.close_free_service)));
                                 builder.setMessage(obj.getString("message"));
-                                builder.setPositiveButton("OK", null);
+                                builder.setPositiveButton(getResources().getString(R.string.ok), null);
                                 //builder.setNegativeButton("Cancel", null);
                                 builder.show();
                                 //Toast.makeText(CheckFreeService.this, obj.getString("message"), Toast.LENGTH_LONG).show();
@@ -244,7 +251,7 @@ public class CloseFreeService extends AppCompatActivity {
 
     private boolean validateUcn() {
         if (et_ucn.getText().toString().trim().isEmpty()) {
-            ucn_input_layout.setError("Please enter UCN");
+            ucn_input_layout.setError(getResources().getString(R.string.validate_ucn));
             return false;
         } else {
             ucn_input_layout.setErrorEnabled(false);
@@ -254,7 +261,7 @@ public class CloseFreeService extends AppCompatActivity {
 
     private boolean validateId() {
         if (et_custId.getText().toString().trim().isEmpty()) {
-            custId_input_layout.setError("Please enter Customer ID");
+            custId_input_layout.setError(getResources().getString(R.string.validate_cust_id));
             return false;
         } else {
             custId_input_layout.setErrorEnabled(false);
@@ -265,7 +272,7 @@ public class CloseFreeService extends AppCompatActivity {
     private boolean validateSpinner() {
         if (filter_sel.trim().isEmpty()) {
             spinnerError.setVisibility(View.VISIBLE);
-            spinnerError.setText("Please select mobile number");
+            spinnerError.setText(getResources().getString(R.string.validate_mobile_no));
             return false;
         } else {
             spinnerError.setVisibility(View.GONE);
@@ -287,7 +294,7 @@ public class CloseFreeService extends AppCompatActivity {
                             JSONArray arr = obj.getJSONArray("employee_dtl");
 
                             final ArrayList<Mobile> list = new ArrayList<Mobile>();
-                            list.add(new Mobile("Select mobile number", "", "Select mobile number"));
+                            list.add(new Mobile("Select mobile number", "", getResources().getString(R.string.select_mobile_number)));
                             for (int i = 0; i < arr.length(); i++) {
                                 list.add(new Mobile(arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname")
                                         , arr.getJSONObject(i).getString("mobile_no"),
