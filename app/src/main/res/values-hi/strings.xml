@@ -1,0 +1,120 @@
+<resources>
+    <string name="app_name">DFSC</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Login page-->
+    <string name="login">लॉग इन करें</string>
+    <string name="select_country">देश चुनिए</string>
+    <string name="select_role">रोल का चयन करे</string>
+    <string name="mobile_number">मोबाइल नंबर</string>
+    <string name="user_name">उपयोगकर्ता नाम</string>
+    <string name="enter_otp">ओटीपी दर्ज करें</string>
+    <string name="get_otp">ओटीपी प्राप्त करें</string>
+    <string name="change_language">भाषा बदलो</string>
+    <string name="loading_countries">लोड हो रहा है देश ..</string>
+    <string name="validate_otp">मान्य OTP दर्ज करें</string>
+    <string name="validate_username">कृपया उपयोगकर्ता नाम दर्ज करें</string>
+    <string name="validate_mobile">कृपया मोबाइल नंबर दर्ज करें</string>
+    <string name="validate_mobile1">कृपया मान्य मोबाइल नंबर दर्ज करें</string>
+    <string name="please_wait">कृपया प्रतीक्षा करें..</string>
+    <string name="exit_app"><b>डीएफएससी से बाहर निकलें</b></string>
+    <string name="exit_app1"><b>क्या आप निसंदेह बाहर निकलना चाहते हैं?</b></string>
+    <string name="read_otp">ओटीपी पढ़ना, कृपया प्रतीक्षा करें ..</string>
+    <string name="no_coutries">कोई भी देश नहीं मिला</string>
+    <string name="incorrect_otp">गलत OTP! लॉगिन करने के लिए कृपया सही ओटीपी दर्ज करें</string>
+    <string name="no_internet">कृपया अपने इंटरनेट कनेक्शन की जाँच करें।</string>
+    <string name="ok">ठीक</string>
+    <string name="cancel">रद्द करना</string>
+
+    <!--Search Customer page-->
+    <string name="validate_search">कृपया खोज स्ट्रिंग दर्ज करें</string>
+    <string name="not_available">उपलब्ध नहीं है!</string>
+    <string name="search">खोज..</string>
+    <string name="chassis_head">चेसिस नंबर</string>
+    <string name="id_head">ग्राहक आईडी</string>
+    <string name="name_head">ग्राहक का नाम</string>
+    <string name="mobile_head">ग्राहक मोबाइल</string>
+    <string name="textVehNo">गाडी नंबर</string>
+    <string name="cust_reg">ग्राहक पंजीकरण</string>
+    <string name="rider_reg">सवार पंजीकरण</string>
+    <string name="search_page_head">ग्राहक विवरण खोजें</string>
+
+    <!--Search Filter-->
+    <string name="chassis">चेसिस</string>
+    <string name="vehicle_no">गाडी नंबर</string>
+    <string name="cust_id">ग्राहक पंजीकरण</string>
+    <string name="cust_mobile">ग्राहक मोबाइल</string>
+
+    <!--Service Status page-->
+    <string name="service_status_head">सेवा की स्थिति</string>
+    <string name="type_head">सेवा प्रकार</string>
+    <string name="status_head">स्थिति</string>
+
+    <!--Check Free Service page-->
+    <string name="select_mobile_number">मोबाइल नंबर चुनें</string>
+    <string name="check_free_page_head">नि: शुल्क सेवा की जांच करें</string>
+    <string name="validate_cust_id">ग्राहक आईडी दर्ज करें</string>
+    <string name="validate_km">किलोमीटर दर्ज करें</string>
+    <string name="validate_service_type">सेवा प्रकार दर्ज करें</string>
+    <string name="validate_vechicle_no">वाहन पंजीकरण संख्या दर्ज करें</string>
+    <string name="free_service"><b>नि: शुल्क सेवा</b></string>
+    <string name="validate_mobile_no">कृपया मोबाइल नंबर चुनें</string>
+    <string name="submit">जमा करें</string>
+    <string name="kms">किलोमीटर *</string>
+    <string name="service_type">सेवा प्रकार *</string>
+    <string name="cust_idd">ग्राहक आईडी *</string>
+    <string name="veh_no">वाहन पंजीकरण संख्या *</string>
+
+    <!--Close Free Service page-->
+    <string name="close_free_page_head">नि: शुल्क सेवा बंद करें</string>
+    <string name="close_free_service"><b>नि: शुल्क सेवा बंद करें</b></string>
+    <string name="validate_ucn">यूसीएन दर्ज करें</string>
+    <string name="ucn">यूसीएन *</string>
+
+    <!--Customer registration page-->
+    <string name="search_chassis">खोज चेसिस..</string>
+    <string name="search_vehNo">वाहन नंबर खोजें..</string>
+    <string name="cust_reg_head">ग्राहक पंजीकरण</string>
+    <string name="select_date_head">उत्पाद खरीदारी दिनांक का चयन करें</string>
+    <string name="enter_chassis">चेसिस नंबर दर्ज करें</string>
+    <string name="enter_vrn">वाहन पंजीकरण नंबर दर्ज करें</string>
+    <string name="enter_name">नाम दर्ज करें</string>
+    <string name="enter_mob_no">मोबाइल नंबर दर्ज करें</string>
+    <string name="validate_mob_no">कृपया मान्य 10 अंकों वाला मोबाइल नंबर दर्ज करें</string>
+    <string name="validate_mob_no1">कृपया वैध 9-अंकों वाला मोबाइल नंबर दर्ज करें</string>
+    <string name="validate_date">उत्पाद खरीद तिथि दर्ज करें</string>
+    <string name="cust_success_dialog"><b>ग्राहक पंजीकरण सफलतापूर्ण</b></string>
+    <string name="cust_failure_dialog"><b>ग्राहक पंजीकरण विफल</b></string>
+    <string name="code">कोड</string>
+    <string name="ppd">उत्पाद खरीद तिथि</string>
+
+    <!--Rider registration page-->
+    <string name="rider_reg_head">राइडर पंजीकरण</string>
+    <string name="rider_name">राइडर का नाम</string>
+    <string name="rider_mobile">राइडर मोबाइल नंबर</string>
+    <string name="rider_success_dialog"><b>राइडर पंजीकरण सफलतापूर्ण</b></string>
+    <string name="rider_failure_dialog"><b>सवार पंजीकरण विफल</b></string>
+
+    <!--my profile-->
+    <string name="name">नाम</string>
+    <string name="username">उपयोगकर्ता नाम</string>
+    <string name="designation">पद</string>
+    <string name="email">ईमेल पता</string>
+    <string name="mobile">मोबाइल नंबर</string>
+
+    <!--Menu-->
+    <string name="my_profile">मेरी प्रोफाइल</string>
+    <string name="logout">लोग आउट</string>
+    <string name="change_lang">भाषा बदलो</string>
+
+    <!--Extras-->
+    <string name="select_lang">कृपया भाषा चुनें</string>
+    <string name="logout_head"><b>लोग आउट</b></string>
+    <string name="logout_msg">क्या आप लॉग आउट करना चाहते हैं?</string>
+    <string name="logout_success">सफलतापूर्वक लॉगआउट करें</string>
+
+</resources>
