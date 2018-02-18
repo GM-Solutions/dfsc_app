@@ -17,6 +17,7 @@
             android:src="@drawable/logo" />
 
         <TextView
+            android:id="@+id/login_head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
@@ -25,14 +26,14 @@
             android:paddingLeft="@dimen/dp_10"
             android:text="Login"
             android:textColor="#000000"
-            android:textSize="@dimen/sp_18"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/country"
             style="@android:style/Widget.Holo.Light.Spinner"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
+            android:layout_height="55dp"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_16"
@@ -54,7 +55,7 @@
             android:id="@+id/role"
             style="@android:style/Widget.Holo.Light.Spinner"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
+            android:layout_height="55dp"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_16"
@@ -84,11 +85,11 @@
                 android:id="@+id/et_userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="User Name"
+                android:hint=""
                 android:inputType="textEmailAddress"
                 android:padding="@dimen/dp_10"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="18sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -103,11 +104,11 @@
                 android:id="@+id/et_mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Mobile Number"
+                android:hint=""
                 android:inputType="number"
                 android:padding="@dimen/dp_10"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="18sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -123,11 +124,11 @@
                 android:id="@+id/et_otp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter OTP"
+                android:hint=""
                 android:inputType="number"
                 android:padding="@dimen/dp_10"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="18sp" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
@@ -139,12 +140,13 @@
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_20"
             android:background="@drawable/roundedview"
-            android:minHeight="@dimen/dp_45"
+            android:paddingBottom="@dimen/dp_5"
             android:paddingLeft="@dimen/dp_45"
             android:paddingRight="@dimen/dp_45"
-            android:text="GET OTP"
+            android:paddingTop="@dimen/dp_5"
+            android:text=""
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_18" />
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/login"
@@ -155,13 +157,29 @@
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_20"
             android:background="@drawable/roundedview"
-            android:minHeight="@dimen/dp_45"
+            android:paddingBottom="@dimen/dp_5"
             android:paddingLeft="@dimen/dp_45"
             android:paddingRight="@dimen/dp_45"
-            android:text="LOGIN"
+            android:paddingTop="@dimen/dp_5"
+            android:text=""
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_18"
+            android:textSize="20sp"
             android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/changeLang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/ic_translation"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Change Language"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/dp_20"/>
 
     </LinearLayout>
 

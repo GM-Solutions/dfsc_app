@@ -51,10 +51,6 @@ import ascent.com.dfsc.R;
 public class Utilities extends Activity {
 
     public static String URL = "http://124.153.104.69:8063/api/";
-    static int flag = 0;
-    static AppPreferences appPrefs;
-    static ProgressDialog Adialog;
-    static DBHelper mydb;
 
     public static void goToPage(Context paramContext, Class paramClass, Bundle paramBundle) {
         Intent localIntent = new Intent(paramContext, paramClass);
@@ -162,14 +158,15 @@ public class Utilities extends Activity {
                 activity.getCurrentFocus().getWindowToken(), 0);
     }
 
-    public static void showLanguageDialog(final Activity activity) {
+    /*
+     public static void showLanguageDialog(final Activity activity) {
         try {
 
             mydb = new DBHelper(activity);
             JSONArray languages;
             ArrayList<LanguageGetSet> list;
             appPrefs = new AppPreferences(activity);
-            //languages=new JSONArray(appPrefs.getLanguage());
+            languages = new JSONArray(appPrefs.getLanguage());
             list = new ArrayList<>();
 
             final Dialog dialog = new Dialog(activity);
@@ -178,8 +175,8 @@ public class Utilities extends Activity {
 
             Spinner language = (Spinner) dialog.findViewById(R.id.language);
             list.add(new LanguageGetSet("123", "Please Select Language"));
-            for (int i = 0; i < 10; i++) {
-                list.add(new LanguageGetSet("" + i, "India"));
+            for (int i = 0; i < languages.length(); i++) {
+                list.add(new LanguageGetSet(languages.getJSONObject(i).getString("id"), languages.getJSONObject(i).getString("value")));
             }
             LanguageAdapter adapter = new LanguageAdapter(activity, list);
             language.setAdapter(adapter);
@@ -187,7 +184,7 @@ public class Utilities extends Activity {
             language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                    LanguageGetSet selected = (LanguageGetSet) arg0.getAdapter().getItem(arg2);
+                    selected = (LanguageGetSet) arg0.getAdapter().getItem(arg2);
                     if (selected.id.equals("123")) {
                         flag = 0;
                         appPrefs.setLanguageSelected("");
@@ -212,11 +209,11 @@ public class Utilities extends Activity {
                         dialog.dismiss();
                         appPrefs.setLanguageSelected("true");
 
-                        //Adialog.setMessage("Please Wait..");
-                        //Adialog.setCancelable(false);
-                        //Adialog.show();
+                        LocaleHelper.setLocale(activity, selected.id);
+                        recreate();
 
                         Toast.makeText(activity, "Selected", Toast.LENGTH_SHORT).show();
+
                     } else {
                         Toast.makeText(activity, "Not Selected", Toast.LENGTH_SHORT).show();
                     }
@@ -229,66 +226,6 @@ public class Utilities extends Activity {
         }
 
     }
-
-    private static void getResouces(final Activity activity) {
-        String JSON_URL = appPrefs.getURL() + "";
-        RequestQueue queue = Volley.newRequestQueue(activity);
-
-        StringRequest req = new StringRequest(Request.Method.POST, JSON_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Adialog.dismiss();
-                        try {
-                            JSONObject obj = new JSONObject(response);
-
-                            if (obj.getString("status").matches("true")) {
-
-                            } else {
-                                Toast.makeText(activity, obj.getString("message"), Toast.LENGTH_SHORT).show();
-                            }
-
-                        } catch (Throwable t) {
-                            Log.e("REsponse", "Could not parse malformed JSON: \"" + response + "\"");
-                        }
-
-                    }
-
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(Login.this, "Error: " + error.toString(), Toast.LENGTH_SHORT).show();
-                        Adialog.dismiss();
-                        Toast.makeText(activity, "Error: " + error.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("language", "");
-                return new JSONObject(params).toString().getBytes();
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                String credentials = "bajaj:indian@1361";
-                String auth = "Basic "
-                        + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                headers.put("Authorization", auth);
-                return headers;
-            }
-        };
-        queue.add(req);
-
-        req.setRetryPolicy(new DefaultRetryPolicy(30000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-    }
-
+     */
 
 }

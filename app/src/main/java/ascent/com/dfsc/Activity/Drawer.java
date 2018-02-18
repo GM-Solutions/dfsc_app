@@ -1,5 +1,6 @@
 package ascent.com.dfsc.Activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,7 +19,11 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +32,12 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.ArrayList;
+
+import ascent.com.dfsc.Adapters.LanguageAdapter;
+import ascent.com.dfsc.Database.DBHelper;
 import ascent.com.dfsc.Fragment.HomeFragment;
+import ascent.com.dfsc.Modal.LanguageGetSet;
 import ascent.com.dfsc.R;
 
 /**
@@ -47,7 +57,11 @@ public class Drawer extends AppCompatActivity {
     NavigationView navigationView;
     private ProgressDialog dialog;
     JSONArray sideMenu;
-    ImageView flag;
+    ImageView flagg;
+
+    DBHelper mydb;
+    int flag=0;
+    LanguageGetSet selected;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +71,7 @@ public class Drawer extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         appPrefs = new AppPreferences(Drawer.this);
-        flag=(ImageView)findViewById(R.id.flag);
+        flagg=(ImageView)findViewById(R.id.flag);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
@@ -91,7 +105,7 @@ public class Drawer extends AppCompatActivity {
             finish();
         }
 
-        Picasso.with(Drawer.this).load(appPrefs.getFlag()).into(flag);
+        Picasso.with(Drawer.this).load(appPrefs.getFlag()).into(flagg);
 
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -137,8 +151,71 @@ public class Drawer extends AppCompatActivity {
 
                 } else if (id == sideMenu.length() + 1) {
 
-                        Utilities.showLanguageDialog(Drawer.this);
+                        //Utilities.showLanguageDialog(Drawer.this);
+                    try {
 
+                        mydb = new DBHelper(Drawer.this);
+                        JSONArray languages;
+                        ArrayList<LanguageGetSet> list;
+                        appPrefs = new AppPreferences(Drawer.this);
+                        languages = new JSONArray(appPrefs.getLanguage());
+                        list = new ArrayList<>();
+
+                        final Dialog dialog = new Dialog(Drawer.this);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setContentView(R.layout.language_dialog);
+
+                        Spinner language = (Spinner) dialog.findViewById(R.id.language);
+                        list.add(new LanguageGetSet("123", "Please Select Language"));
+                        for (int i = 0; i < languages.length(); i++) {
+                            list.add(new LanguageGetSet(languages.getJSONObject(i).getString("id"), languages.getJSONObject(i).getString("value")));
+                        }
+                        LanguageAdapter adapter = new LanguageAdapter(Drawer.this, list);
+                        language.setAdapter(adapter);
+
+                        language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                                selected = (LanguageGetSet) arg0.getAdapter().getItem(arg2);
+                                if (selected.id.equals("123")) {
+                                    flag = 0;
+                                    appPrefs.setLanguageSelected("");
+                                } else {
+                                    flag = 1;
+                                }
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+
+                        dialog.show();
+
+                        Button submit = (Button) dialog.findViewById(R.id.submit);
+                        submit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (flag == 1) {
+                                    dialog.dismiss();
+                                    appPrefs.setLanguageSelected("true");
+
+                                    LocaleHelper.setLocale(Drawer.this, selected.id);
+                                    recreate();
+
+                                    Toast.makeText(Drawer.this, "Selected", Toast.LENGTH_SHORT).show();
+
+                                } else {
+                                    Toast.makeText(Drawer.this, "Not Selected", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        });
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                 }else if (id == sideMenu.length() + 2) {
                     AlertDialog.Builder builder =

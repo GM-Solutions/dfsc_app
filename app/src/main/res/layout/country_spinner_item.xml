@@ -28,6 +28,6 @@
         android:paddingTop="@dimen/dp_5"
         android:text=""
         android:textColor="@color/colorPrimary"
-        android:textSize="16dip" />
+        android:textSize="17sp" />
 
 </LinearLayout>

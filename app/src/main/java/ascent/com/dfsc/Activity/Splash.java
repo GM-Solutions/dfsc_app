@@ -38,14 +38,10 @@ public class Splash extends AppCompatActivity {
                     Splash.this.startActivity(mainIntent);
                     Splash.this.finish();
                 } else if (appPreferences.getShouldLogin().trim().matches("true")) {
-                    if (!(appPreferences.getLanguageSelected().trim().isEmpty())) {
-                        //appPreferences.RemoveAllSharedPreference();
-                        Intent mainIntent = new Intent(Splash.this, Drawer.class);
-                        Splash.this.startActivity(mainIntent);
-                        Splash.this.finish();
-                    } else {
-                        Utilities.showLanguageDialog(Splash.this);
-                    }
+                    Intent mainIntent = new Intent(Splash.this, Drawer.class);
+                    Splash.this.startActivity(mainIntent);
+                    Splash.this.finish();
+
                 } else {
                     Intent mainIntent = new Intent(Splash.this, Login.class);
                     Splash.this.startActivity(mainIntent);

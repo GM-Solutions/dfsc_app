@@ -45,7 +45,7 @@
             android:id="@+id/sa_mobile"
             style="@android:style/Widget.Holo.Light.Spinner"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
+            android:layout_height="55dp"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_10"
@@ -79,7 +79,7 @@
                 android:inputType="text"
                 android:padding="@dimen/dp_10"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="18sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -98,7 +98,7 @@
                 android:inputType="text"
                 android:padding="@dimen/dp_10"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="18sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -117,7 +117,7 @@
                 android:inputType="numberDecimal"
                 android:padding="@dimen/dp_10"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="18sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -136,13 +136,12 @@
                 android:inputType="number"
                 android:padding="@dimen/dp_10"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="18sp" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/submit"
             android:layout_width="match_parent"
-            android:minHeight="@dimen/dp_45"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
@@ -151,9 +150,11 @@
             android:background="@drawable/roundedview"
             android:paddingLeft="@dimen/dp_45"
             android:paddingRight="@dimen/dp_45"
+            android:paddingTop="@dimen/dp_5"
+            android:paddingBottom="@dimen/dp_5"
             android:text="SUBMIT"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_18" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 

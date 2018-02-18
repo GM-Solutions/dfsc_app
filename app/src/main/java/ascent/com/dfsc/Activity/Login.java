@@ -1,5 +1,6 @@
 package ascent.com.dfsc.Activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.text.InputFilter;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -47,6 +49,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import ascent.com.dfsc.Adapters.CountryAdapter;
+import ascent.com.dfsc.Adapters.LanguageAdapter;
+import ascent.com.dfsc.Database.DBHelper;
+import ascent.com.dfsc.Modal.LanguageGetSet;
 import ascent.com.dfsc.R;
 
 public class Login extends AppCompatActivity {
@@ -66,6 +71,11 @@ public class Login extends AppCompatActivity {
     JSONArray roleArray;
     ArrayList<Role> list1;
     ArrayAdapter<Role> roleadapter;
+    TextView changeLang,login_head;
+
+    DBHelper mydb;
+    int flag=0;
+    LanguageGetSet selected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,13 +95,88 @@ public class Login extends AppCompatActivity {
         catchOtpDialog = new ProgressDialog(Login.this);
         appPrefs = new AppPreferences(Login.this);
 
+        changeLang=(TextView)findViewById(R.id.changeLang);
+        changeLang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Utilities.showLanguageDialog(Login.this);
+                try {
+
+                    mydb = new DBHelper(Login.this);
+                    JSONArray languages;
+                    ArrayList<LanguageGetSet> list;
+                    appPrefs = new AppPreferences(Login.this);
+                    languages = new JSONArray(appPrefs.getLanguage());
+                    list = new ArrayList<>();
+
+                    final Dialog dialog = new Dialog(Login.this);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setContentView(R.layout.language_dialog);
+
+                    Spinner language = (Spinner) dialog.findViewById(R.id.language);
+                    list.add(new LanguageGetSet("123", "Please Select Language"));
+                    for (int i = 0; i < languages.length(); i++) {
+                        list.add(new LanguageGetSet(languages.getJSONObject(i).getString("id"), languages.getJSONObject(i).getString("value")));
+                    }
+                    LanguageAdapter adapter = new LanguageAdapter(Login.this, list);
+                    language.setAdapter(adapter);
+
+                    language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                            selected = (LanguageGetSet) arg0.getAdapter().getItem(arg2);
+                            if (selected.id.equals("123")) {
+                                flag = 0;
+                                appPrefs.setLanguageSelected("");
+                            } else {
+                                flag = 1;
+                            }
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+
+                    dialog.show();
+
+                    Button submit = (Button) dialog.findViewById(R.id.submit);
+                    submit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (flag == 1) {
+                                dialog.dismiss();
+                                appPrefs.setLanguageSelected("true");
+
+                                LocaleHelper.setLocale(Login.this, selected.id);
+                                recreate();
+
+                                //Toast.makeText(Login.this, "Selected", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                //Toast.makeText(Login.this, "Not Selected", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         mobile_input_layout = (TextInputLayout) findViewById(R.id.mobile_input_layout);
         userName_input_layout = (TextInputLayout) findViewById(R.id.userName_input_layout);
         otp_input_layout = (TextInputLayout) findViewById(R.id.otp_input_layout);
 
         et_mobile = (EditText) findViewById(R.id.et_mobile);
+        et_mobile.setHint(getResources().getString(R.string.mobile_number));
         et_userName = (EditText) findViewById(R.id.et_userName);
+        et_userName.setHint(getResources().getString(R.string.user_name));
         et_otp = (EditText) findViewById(R.id.et_otp);
+        et_otp.setHint(getResources().getString(R.string.enter_otp));
 
         Mint.initAndStartSession(this.getApplication(), "3e402768");
 
@@ -158,9 +243,13 @@ public class Login extends AppCompatActivity {
 
         country_error = (TextView) findViewById(R.id.country_error);
         role_error = (TextView) findViewById(R.id.role_error);
+        login_head = (TextView) findViewById(R.id.login_head);
+        login_head.setText(getResources().getString(R.string.login));
 
         getOTP = (Button) findViewById(R.id.getOTP);
+        getOTP.setText(getResources().getString(R.string.get_otp));
         login = (Button) findViewById(R.id.login);
+        login.setText(getResources().getString(R.string.login));
 
         GradientDrawable bgShape = (GradientDrawable)getOTP.getBackground();
         bgShape.setColor(Color.parseColor("#003763"));
@@ -201,7 +290,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        dialog.setMessage("Loading Countries..");
+        dialog.setMessage(getResources().getString(R.string.loading_countries));
         dialog.setCancelable(false);
         dialog.show();
         getCountries();
@@ -226,9 +315,13 @@ public class Login extends AppCompatActivity {
                             dialog.dismiss();
                             JSONObject obj = new JSONObject(response);
                             if (obj.getString("status").matches("true")) {
+
+                                appPrefs.setLanguage(obj.getJSONArray("language"));
+                                Log.e("language", appPrefs.getLanguage());
+
                                 JSONArray arr = obj.getJSONArray("countries");
                                 final ArrayList<Countries> list = new ArrayList<Countries>();
-                                list.add(new Countries("0", "Select Country", "0", "0", "URL","0"));
+                                list.add(new Countries("0", getResources().getString(R.string.select_country), "0", "0", "URL","0"));
 
                                 for (int i = 0; i < arr.length(); i++) {
                                     jsonObject = arr.getJSONObject(i);
@@ -252,7 +345,7 @@ public class Login extends AppCompatActivity {
 
                             } else {
                                 dialog.dismiss();
-                                Toast.makeText(Login.this, "No countries found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this, getResources().getString(R.string.no_coutries), Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -318,7 +411,7 @@ public class Login extends AppCompatActivity {
 
             Log.e("ROLE", String.valueOf(roleArray));
 
-            list1.add(new Role("0", "Select Role", "0"));
+            list1.add(new Role("0", getResources().getString(R.string.select_role), "0"));
             for (int i = 0; i < arr1.length(); i++) {
 
                 JSONObject obj1 = arr1.getJSONObject(i);
@@ -361,17 +454,17 @@ public class Login extends AppCompatActivity {
                 startActivity(new Intent(Login.this, Drawer.class));
                 finish();
             } else {
-                Toast.makeText(Login.this, "Incorrect OTP! Please enter correct OTP to login.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, getResources().getString(R.string.incorrect_otp), Toast.LENGTH_SHORT).show();
             }
 
         } else {
-            Toast.makeText(Login.this, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Login.this, getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }
     }
 
     private boolean validateOtp() {
         if (et_otp.getText().toString().trim().isEmpty()) {
-            otp_input_layout.setError("Enter valid OTP");
+            otp_input_layout.setError(getResources().getString(R.string.validate_otp));
             return false;
         } else {
             otp_input_layout.setErrorEnabled(false);
@@ -400,7 +493,7 @@ public class Login extends AppCompatActivity {
         }
 
         if (Utilities.checkNetworkConnection(getApplicationContext())) {
-            dialog.setMessage("Please Wait..");
+            dialog.setMessage(getResources().getString(R.string.please_wait));
             dialog.setCancelable(false);
             dialog.show();
             loginApi();
@@ -408,14 +501,14 @@ public class Login extends AppCompatActivity {
             //finish();
 
         } else {
-            Toast.makeText(Login.this, "Please check your internet connection.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Login.this, getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }
 
     }
 
     private boolean validateUsername() {
         if (et_userName.getText().toString().trim().isEmpty()) {
-            userName_input_layout.setError("Please enter username");
+            userName_input_layout.setError(getResources().getString(R.string.validate_username));
             return false;
         } else {
             userName_input_layout.setErrorEnabled(false);
@@ -445,13 +538,13 @@ public class Login extends AppCompatActivity {
 
     private boolean validateMobile() {
         if (et_mobile.getText().toString().trim().isEmpty()) {
-            mobile_input_layout.setError("Please enter mobile number");
+            mobile_input_layout.setError(getResources().getString(R.string.validate_mobile));
             return false;
         } else if (et_mobile.getText().length() < mobile_length) {
-            mobile_input_layout.setError("Please enter valid mobile number");
+            mobile_input_layout.setError(getResources().getString(R.string.validate_mobile1));
             return false;
         } else if (et_mobile.getText().length() > mobile_length) {
-            mobile_input_layout.setError("Please enter valid mobile number");
+            mobile_input_layout.setError(getResources().getString(R.string.validate_mobile1));
             return false;
         } else {
             mobile_input_layout.setErrorEnabled(false);
@@ -494,14 +587,12 @@ public class Login extends AppCompatActivity {
 
                                 appPrefs.setSideMenu(obj.getJSONObject("menu").getJSONArray("side_menu"));
                                 appPrefs.setDashboard(obj.getJSONObject("menu").getJSONArray("dashboard"));
-                                //appPrefs.setLanguage(obj.getJSONObject("menu").getJSONArray("languages"));
 
-                                Toast.makeText(Login.this, "Reading OTP, Please wait..", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Login.this, getResources().getString(R.string.read_otp), Toast.LENGTH_LONG).show();
 
                                 Log.e("menu", appPrefs.getSideMenu());
                                 Log.e("menu", appPrefs.getDashboard());
                                 Log.e("group", appPrefs.getGroup());
-                                Log.e("languages", appPrefs.getGroup());
 
                                 Mint.initAndStartSession(getApplication(), "3e402768");
                                 Mint.setUserIdentifier(obj.getString("user_id"));
@@ -639,15 +730,15 @@ public class Login extends AppCompatActivity {
     public void onBackPressed() {
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(Login.this, R.style.AppCompatAlertDialogStyle);
-        builder.setTitle(Html.fromHtml("<b>Exit DFSC</b>"));
-        builder.setMessage("Are you sure you want to Exit?");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setTitle(Html.fromHtml(getResources().getString(R.string.exit_app)));
+        builder.setMessage(getResources().getString(R.string.exit_app1));
+        builder.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 finish();
             }
         });
-        builder.setNegativeButton("Cancel", null);
+        builder.setNegativeButton(getResources().getString(R.string.cancel), null);
         builder.show();
 
     }

@@ -5,4 +5,29 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Login page-->
+    <string name="login">Login</string>
+    <string name="select_country">Select Country</string>
+    <string name="select_role">Select Role</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="user_name">User Name</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="get_otp">GET OTP</string>
+    <string name="change_language">Change Langauge</string>
+    <string name="loading_countries">Loading Countries..</string>
+    <string name="validate_otp">Enter valid OTP</string>
+    <string name="validate_username">Please enter username</string>
+    <string name="validate_mobile">Please enter mobile number</string>
+    <string name="validate_mobile1">Please enter valid mobile number</string>
+    <string name="please_wait">Please Wait..</string>
+    <string name="exit_app"><b>Exit DFSC</b></string>
+    <string name="exit_app1"><b>Are you sure you want to Exit?</b></string>
+    <string name="read_otp">Reading OTP, Please wait..</string>
+    <string name="no_coutries">No countries found</string>
+    <string name="incorrect_otp">Incorrect OTP! Please enter correct OTP to login.</string>
+    <string name="no_internet">Please check your internet connection.</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+
 </resources>
