@@ -15,6 +15,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 import ascent.com.dfsc.Activity.AppPreferences;
+import ascent.com.dfsc.Activity.LocaleHelper;
 import ascent.com.dfsc.Adapters.GridAdapter;
 import ascent.com.dfsc.Modal.GridData;
 import ascent.com.dfsc.R;

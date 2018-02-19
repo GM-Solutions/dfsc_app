@@ -66,21 +66,26 @@ public class GridAdapter extends BaseAdapter {
         name = (TextView) rowView.findViewById(R.id.name);
         image = (ImageView) rowView.findViewById(R.id.image);
 
-        name.setText(list.get(position).name);
+        //name.setText(list.get(position).name);
 
         if (list.get(position).id.matches("search_customer_detail")) {
             image.setImageResource(R.drawable.search_customer_details);
-            name.setText("Search Customer");
+            name.setText(c.getResources().getString(R.string.search_page_head));
         } else if (list.get(position).id.matches("service_status")) {
             image.setImageResource(R.drawable.service_status);
+            name.setText(c.getResources().getString(R.string.service_status_head));
         } else if (list.get(position).id.matches("check_free_services")) {
             image.setImageResource(R.drawable.check_free_service);
+            name.setText(c.getResources().getString(R.string.check_free_page_head));
         } else if (list.get(position).id.matches("close_free_services")) {
             image.setImageResource(R.drawable.close_free_service);
+            name.setText(c.getResources().getString(R.string.close_free_page_head));
         } else if (list.get(position).id.matches("customer_registration")) {
             image.setImageResource(R.drawable.customer_registation);
+            name.setText(c.getResources().getString(R.string.cust_reg_head));
         } else if (list.get(position).id.matches("rider_registration")) {
             image.setImageResource(R.drawable.rider_registration);
+            name.setText(c.getResources().getString(R.string.rider_reg_head));
         }
 
         //image.setImageResource(list.get(position).image);
