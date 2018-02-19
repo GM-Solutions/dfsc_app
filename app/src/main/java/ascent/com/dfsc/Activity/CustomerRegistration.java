@@ -2,6 +2,7 @@ package ascent.com.dfsc.Activity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -222,7 +223,7 @@ public class CustomerRegistration extends AppCompatActivity {
                 day = c.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dpd = new DatePickerDialog(CustomerRegistration.this, date, year, month, day);
-                dpd.getDatePicker().setMinDate(c.getTimeInMillis());
+                dpd.getDatePicker().setMaxDate(c.getTimeInMillis());
                 dpd.setTitle(getResources().getString(R.string.select_date_head));
                 dpd.show();
             }
@@ -705,4 +706,10 @@ public class CustomerRegistration extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
+
 }

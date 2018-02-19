@@ -116,5 +116,6 @@
     <string name="logout_head"><b>लोग आउट</b></string>
     <string name="logout_msg">क्या आप लॉग आउट करना चाहते हैं?</string>
     <string name="logout_success">सफलतापूर्वक लॉगआउट करें</string>
-
+    <string name="exit_dfsc"><b>डीएफएससी से बाहर निकलें</b></string>
+    <string name="exit_msg">क्या आप निसंदेह बाहर निकलना चाहते हैं?</string>
 </resources>

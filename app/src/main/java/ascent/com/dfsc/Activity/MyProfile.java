@@ -1,6 +1,7 @@
 package ascent.com.dfsc.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -161,5 +162,11 @@ public class MyProfile extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
+
 
 }

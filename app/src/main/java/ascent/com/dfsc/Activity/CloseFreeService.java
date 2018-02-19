@@ -1,6 +1,7 @@
 package ascent.com.dfsc.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -375,4 +376,10 @@ public class CloseFreeService extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
+
 }

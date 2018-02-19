@@ -2,6 +2,7 @@ package ascent.com.dfsc.Activity;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -320,4 +321,10 @@ public class Drawer extends AppCompatActivity {
         builder.setNegativeButton(getResources().getString(R.string.cancel), null);
         builder.show();
     }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
+
 }

@@ -1,6 +1,7 @@
 package ascent.com.dfsc.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -391,6 +392,11 @@ public class SearchCustomerDetails extends AppCompatActivity {
         public String toString() {
             return chassis;
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
     }
 
 }
