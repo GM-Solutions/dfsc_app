@@ -46,7 +46,7 @@ import ascent.com.dfsc.R;
 public class CheckFreeService extends AppCompatActivity {
 
     Toolbar toolbar;
-    TextView filterError,toolbar_text;
+    TextView filterError, toolbar_text;
     Spinner sa_mobile;
     private ProgressDialog dialog;
     protected AppPreferences appPrefs;
@@ -106,7 +106,7 @@ public class CheckFreeService extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.check_free_page_head));
 
-        toolbar_text=(TextView)findViewById(R.id.toolbar_text);
+        toolbar_text = (TextView) findViewById(R.id.toolbar_text);
         toolbar_text.setText(getResources().getString(R.string.check_free_page_head));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -171,7 +171,7 @@ public class CheckFreeService extends AppCompatActivity {
                     //finish();
 
                 } else {
-                    Toast.makeText(CheckFreeService.this,  getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CheckFreeService.this, getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -280,12 +280,22 @@ public class CheckFreeService extends AppCompatActivity {
                             JSONArray arr = obj.getJSONArray("employee_dtl");
 
                             final ArrayList<Mobile> list = new ArrayList<Mobile>();
-                            list.add(new Mobile("Select mobile number", "", getResources().getString(R.string.select_mobile_number)));
-                            for (int i = 0; i < arr.length(); i++) {
-                                list.add(new Mobile(arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname")
-                                        , arr.getJSONObject(i).getString("mobile_no"),
-                                        arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname") + " (" + arr.getJSONObject(i).getString("mobile_no") + ")"));
+
+                            if (arr.length() == 1) {
+                                list.add(new Mobile(arr.getJSONObject(0).getString("firstname") + " " + arr.getJSONObject(0).getString("lastname")
+                                        , arr.getJSONObject(0).getString("mobile_no"),
+                                        arr.getJSONObject(0).getString("firstname") + " " + arr.getJSONObject(0).getString("lastname") + " (" + arr.getJSONObject(0).getString("mobile_no") + ")"));
+                                //sa_mobile.setSelection();
+                                sa_mobile.setEnabled(false);
+                            } else {
+                                list.add(new Mobile("Select mobile number", "", getResources().getString(R.string.select_mobile_number)));
+                                for (int i = 0; i < arr.length(); i++) {
+                                    list.add(new Mobile(arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname")
+                                            , arr.getJSONObject(i).getString("mobile_no"),
+                                            arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname") + " (" + arr.getJSONObject(i).getString("mobile_no") + ")"));
+                                }
                             }
+
 
                             ArrayAdapter<Mobile> adapter = new ArrayAdapter<Mobile>(CheckFreeService.this,
                                     R.layout.list_item, R.id.name, list);

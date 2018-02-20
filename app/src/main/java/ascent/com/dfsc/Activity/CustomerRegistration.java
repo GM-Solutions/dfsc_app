@@ -59,11 +59,12 @@ public class CustomerRegistration extends AppCompatActivity {
     Button submit;
     private ProgressDialog dialog;
     protected AppPreferences appPrefs;
-    TextView searchError, spinnerError,head,toolbar_text;
+    TextView searchError, spinnerError, head, toolbar_text;
     Spinner sa_mobile;
     String mobile_sel, search_filter, menu_name;
     int month, year, day;
     ImageView flag;
+    String intent_name, intent_mobile, intent_veh_no, intent_chassis, from_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,11 +77,16 @@ public class CustomerRegistration extends AppCompatActivity {
         search_filter = "";
         menu_name = "";
 
+        intent_name = "";
+        intent_mobile = "";
+        intent_veh_no = "";
+        intent_chassis = "";
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.cust_reg_head));
 
-        toolbar_text=(TextView)findViewById(R.id.toolbar_text);
+        toolbar_text = (TextView) findViewById(R.id.toolbar_text);
         toolbar_text.setText(getResources().getString(R.string.cust_reg_head));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -90,6 +96,36 @@ public class CustomerRegistration extends AppCompatActivity {
             menu_name = getIntent().getStringExtra("menu_name");
         } else {
             menu_name = "customer_registration";
+        }
+
+        if (getIntent().getStringExtra("intent_name") != null) {
+            intent_name = getIntent().getStringExtra("intent_name");
+        } else {
+            intent_name = "";
+        }
+
+        if (getIntent().getStringExtra("intent_mobile") != null) {
+            intent_mobile = getIntent().getStringExtra("intent_mobile");
+        } else {
+            intent_mobile = "";
+        }
+
+        if (getIntent().getStringExtra("intent_veh_no") != null) {
+            intent_veh_no = getIntent().getStringExtra("intent_veh_no");
+        } else {
+            intent_veh_no = "";
+        }
+
+        if (getIntent().getStringExtra("intent_chassis") != null) {
+            intent_chassis = getIntent().getStringExtra("intent_chassis");
+        } else {
+            intent_chassis = "";
+        }
+
+        if (getIntent().getStringExtra("from_search") != null) {
+            from_search = getIntent().getStringExtra("from_search");
+        } else {
+            from_search = "";
         }
 
         dialog = new ProgressDialog(CustomerRegistration.this);
@@ -229,14 +265,37 @@ public class CustomerRegistration extends AppCompatActivity {
             }
         });
 
-        et_id.setEnabled(false);
-        et_name.setEnabled(false);
-        et_phone.setEnabled(false);
-        et_date.setEnabled(false);
-        sa_mobile.setEnabled(true);
-        submit.setEnabled(false);
-        GradientDrawable bgShape = (GradientDrawable) submit.getBackground();
-        bgShape.setColor(Color.parseColor("#717171"));
+        if (from_search.matches("true")) {
+            et_id.setEnabled(true);
+            et_name.setEnabled(true);
+            et_phone.setEnabled(true);
+            et_date.setEnabled(true);
+            sa_mobile.setEnabled(true);
+            submit.setEnabled(true);
+            GradientDrawable bgShape = (GradientDrawable) submit.getBackground();
+            bgShape.setColor(Color.parseColor("#003763"));
+
+            if (appPrefs.getCountry().matches("india")) {
+                et_id.setText(intent_chassis);
+            } else {
+                et_id.setText(intent_veh_no);
+            }
+
+            et_name.setText(intent_name);
+            et_phone.setText(intent_mobile);
+            et_cc.setText(appPrefs.getCode());
+
+        } else {
+            et_id.setEnabled(false);
+            et_name.setEnabled(false);
+            et_phone.setEnabled(false);
+            et_date.setEnabled(false);
+            sa_mobile.setEnabled(true);
+            submit.setEnabled(false);
+            GradientDrawable bgShape = (GradientDrawable) submit.getBackground();
+            bgShape.setColor(Color.parseColor("#717171"));
+        }
+
     }
 
     private DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -534,11 +593,20 @@ public class CustomerRegistration extends AppCompatActivity {
                             JSONArray arr = obj.getJSONArray("employee_dtl");
 
                             final ArrayList<Mobile> list = new ArrayList<Mobile>();
-                            list.add(new Mobile("Select mobile number", "", getResources().getString(R.string.select_mobile_number)));
-                            for (int i = 0; i < arr.length(); i++) {
-                                list.add(new Mobile(arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname")
-                                        , arr.getJSONObject(i).getString("mobile_no"),
-                                        arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname") + " (" + arr.getJSONObject(i).getString("mobile_no") + ")"));
+
+                            if (arr.length() == 1) {
+                                list.add(new Mobile(arr.getJSONObject(0).getString("firstname") + " " + arr.getJSONObject(0).getString("lastname")
+                                        , arr.getJSONObject(0).getString("mobile_no"),
+                                        arr.getJSONObject(0).getString("firstname") + " " + arr.getJSONObject(0).getString("lastname") + " (" + arr.getJSONObject(0).getString("mobile_no") + ")"));
+
+                                sa_mobile.setEnabled(false);
+                            } else {
+                                list.add(new Mobile("Select mobile number", "", getResources().getString(R.string.select_mobile_number)));
+                                for (int i = 0; i < arr.length(); i++) {
+                                    list.add(new Mobile(arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname")
+                                            , arr.getJSONObject(i).getString("mobile_no"),
+                                            arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname") + " (" + arr.getJSONObject(i).getString("mobile_no") + ")"));
+                                }
                             }
 
                             ArrayAdapter<Mobile> adapter = new ArrayAdapter<Mobile>(CustomerRegistration.this,

@@ -57,7 +57,7 @@ public class SearchCustomerDetails extends AppCompatActivity {
     LinearLayout ll1;
     CardView searchResult;
     TextView searchError,toolbar_text;
-    String intent_name, intent_mobile, intent_veh_no;
+    String intent_name, intent_mobile, intent_veh_no,intent_chassis;
     ImageView flag;
 
     @Override
@@ -191,7 +191,12 @@ public class SearchCustomerDetails extends AppCompatActivity {
                 if (custReg.isEnabled()) {
                     if (custReg.getText().toString().matches(getResources().getString(R.string.cust_reg))) {
                         Intent intent = new Intent(SearchCustomerDetails.this, CustomerRegistration.class);
-                        //intent.putExtra("chassis", chassis_number.getText());
+                        //intent_name, intent_mobile, intent_veh_no,intent_chassis
+                        intent.putExtra("intent_chassis", intent_chassis);
+                        intent.putExtra("intent_name", intent_name);
+                        intent.putExtra("intent_mobile", intent_mobile);
+                        intent.putExtra("intent_veh_no", intent_veh_no);
+                        intent.putExtra("from_search", "true");
                         startActivity(intent);
                     } else if (custReg.getText().toString().matches(getResources().getString(R.string.rider_reg))) {
                         Intent intent = new Intent(SearchCustomerDetails.this, RiderRegistration.class);
@@ -237,6 +242,7 @@ public class SearchCustomerDetails extends AppCompatActivity {
                                 intent_name = arr.getJSONObject(0).getString("customer_name");
                                 intent_mobile = arr.getJSONObject(0).getString("mobile_no");
                                 intent_veh_no = arr.getJSONObject(0).getString("veh_reg_no");
+                                intent_chassis = arr.getJSONObject(0).getString("chassis");
 
                                 ll1.setVisibility(View.VISIBLE);
                                 searchResult.setVisibility(View.VISIBLE);
@@ -254,9 +260,9 @@ public class SearchCustomerDetails extends AppCompatActivity {
                                         bgShape.setColor(Color.parseColor("#003763"));
                                     }
 
-                                    veh_no.setVisibility(View.GONE);
-                                    colon.setVisibility(View.GONE);
-                                    textVehNo.setVisibility(View.GONE);
+                                    veh_no.setVisibility(View.VISIBLE);
+                                    colon.setVisibility(View.VISIBLE);
+                                    textVehNo.setVisibility(View.VISIBLE);
 
                                 } else {
                                     if (arr.getJSONObject(0).getString("register_customer").matches("true")) {
@@ -271,12 +277,11 @@ public class SearchCustomerDetails extends AppCompatActivity {
                                         bgShape.setColor(Color.parseColor("#717171"));
                                     }
 
-                                    veh_no.setVisibility(View.VISIBLE);
-                                    colon.setVisibility(View.VISIBLE);
-                                    textVehNo.setVisibility(View.VISIBLE);
+                                    veh_no.setVisibility(View.GONE);
+                                    colon.setVisibility(View.GONE);
+                                    textVehNo.setVisibility(View.GONE);
 
                                 }
-
 
                                 checkFreeService.setText(arr.getJSONObject(0).getJSONObject("service_detail").getString("label"));
 
@@ -288,6 +293,12 @@ public class SearchCustomerDetails extends AppCompatActivity {
                                     checkFreeService.setEnabled(false);
                                     GradientDrawable bgShape = (GradientDrawable) checkFreeService.getBackground();
                                     bgShape.setColor(Color.parseColor("#717171"));
+                                }
+
+                                if(appPrefs.getGroup().matches("sales_executive")){
+                                    checkFreeService.setVisibility(View.GONE);
+                                }else{
+                                    checkFreeService.setVisibility(View.VISIBLE);
                                 }
 
 

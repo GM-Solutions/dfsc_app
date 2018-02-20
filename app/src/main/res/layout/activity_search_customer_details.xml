@@ -286,13 +286,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_20"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10">
 
             <Button
                 android:id="@+id/checkFreeService"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_5"
                 android:layout_weight="1"
                 android:background="@drawable/roundedview"
@@ -303,14 +304,13 @@
                 android:paddingRight="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_5"
                 android:textColor="@color/white"
-                android:textSize="17sp" />
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/custReg"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp_5"
-                android:layout_marginRight="@dimen/dp_10"
                 android:layout_weight="1"
                 android:background="@drawable/roundedview"
                 android:drawableLeft="@drawable/ic_reg"
@@ -321,7 +321,7 @@
                 android:paddingTop="@dimen/dp_5"
                 android:text=""
                 android:textColor="@color/white"
-                android:textSize="17sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
     </LinearLayout>

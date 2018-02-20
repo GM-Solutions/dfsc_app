@@ -49,8 +49,8 @@ public class CloseFreeService extends AppCompatActivity {
     Spinner sa_mobile;
     private ProgressDialog dialog;
     protected AppPreferences appPrefs;
-    String filter_sel, menu_name,id;
-    TextView spinnerError,toolbar_text;
+    String filter_sel, menu_name, id;
+    TextView spinnerError, toolbar_text;
     TextInputLayout ucn_input_layout, custId_input_layout;
     EditText et_ucn, et_custId;
     Button submit;
@@ -70,7 +70,7 @@ public class CloseFreeService extends AppCompatActivity {
         dialog = new ProgressDialog(CloseFreeService.this);
         appPrefs = new AppPreferences(CloseFreeService.this);
 
-        flag=(ImageView)findViewById(R.id.flag);
+        flag = (ImageView) findViewById(R.id.flag);
         Picasso.with(CloseFreeService.this).load(appPrefs.getFlag()).into(flag);
 
         if (getIntent().getStringExtra("menu_name") != null) {
@@ -83,7 +83,7 @@ public class CloseFreeService extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.close_free_page_head));
 
-        toolbar_text=(TextView)findViewById(R.id.toolbar_text);
+        toolbar_text = (TextView) findViewById(R.id.toolbar_text);
         toolbar_text.setText(getResources().getString(R.string.close_free_page_head));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -114,7 +114,7 @@ public class CloseFreeService extends AppCompatActivity {
             }
         });
 
-        GradientDrawable bgShape = (GradientDrawable)submit.getBackground();
+        GradientDrawable bgShape = (GradientDrawable) submit.getBackground();
         bgShape.setColor(Color.parseColor("#003763"));
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -124,9 +124,9 @@ public class CloseFreeService extends AppCompatActivity {
             }
         });
 
-        if(appPrefs.getCountry().matches("india")){
+        if (appPrefs.getCountry().matches("india")) {
             custId_input_layout.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             custId_input_layout.setVisibility(View.GONE);
             id = "";
         }
@@ -164,7 +164,7 @@ public class CloseFreeService extends AppCompatActivity {
     }
 
     private void closeService() {
-        id=et_custId.getText().toString().trim();
+        id = et_custId.getText().toString().trim();
 
         String JSON_URL = appPrefs.getURL() + "Transaction/close_coupon";
         RequestQueue queue = Volley.newRequestQueue(CloseFreeService.this);
@@ -227,7 +227,7 @@ public class CloseFreeService extends AppCompatActivity {
                 params.put("country", appPrefs.getCountry());
                 params.put("ucn", et_ucn.getText().toString().trim());
                 params.put("mobile_no", filter_sel);
-                params.put("customer_id",id);
+                params.put("customer_id", id);
                 Log.e("params", new JSONObject(params).toString());
                 return new JSONObject(params).toString().getBytes();
             }
@@ -295,11 +295,19 @@ public class CloseFreeService extends AppCompatActivity {
                             JSONArray arr = obj.getJSONArray("employee_dtl");
 
                             final ArrayList<Mobile> list = new ArrayList<Mobile>();
-                            list.add(new Mobile("Select mobile number", "", getResources().getString(R.string.select_mobile_number)));
-                            for (int i = 0; i < arr.length(); i++) {
-                                list.add(new Mobile(arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname")
-                                        , arr.getJSONObject(i).getString("mobile_no"),
-                                        arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname") + " (" + arr.getJSONObject(i).getString("mobile_no") + ")"));
+                            if (arr.length() == 1) {
+                                list.add(new Mobile(arr.getJSONObject(0).getString("firstname") + " " + arr.getJSONObject(0).getString("lastname")
+                                        , arr.getJSONObject(0).getString("mobile_no"),
+                                        arr.getJSONObject(0).getString("firstname") + " " + arr.getJSONObject(0).getString("lastname") + " (" + arr.getJSONObject(0).getString("mobile_no") + ")"));
+
+                                sa_mobile.setEnabled(false);
+                            } else {
+                                list.add(new Mobile("Select mobile number", "", getResources().getString(R.string.select_mobile_number)));
+                                for (int i = 0; i < arr.length(); i++) {
+                                    list.add(new Mobile(arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname")
+                                            , arr.getJSONObject(i).getString("mobile_no"),
+                                            arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname") + " (" + arr.getJSONObject(i).getString("mobile_no") + ")"));
+                                }
                             }
 
                             ArrayAdapter<Mobile> adapter = new ArrayAdapter<Mobile>(CloseFreeService.this,
