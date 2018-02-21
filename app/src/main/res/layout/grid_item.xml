@@ -26,8 +26,8 @@
         android:gravity="center"
         android:minLines="2"
         android:maxLines="2"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
         android:text=""
         android:textColor="@android:color/white"
         android:textSize="14sp" />

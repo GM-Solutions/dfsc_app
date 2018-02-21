@@ -16,9 +16,11 @@ import android.text.Html;
 import android.text.InputFilter;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -175,11 +177,11 @@ public class Login extends AppCompatActivity {
         otp_input_layout = (TextInputLayout) findViewById(R.id.otp_input_layout);
 
         et_mobile = (EditText) findViewById(R.id.et_mobile);
-        et_mobile.setHint(getResources().getString(R.string.mobile_number));
+        mobile_input_layout.setHint(getResources().getString(R.string.mobile_number));
         et_userName = (EditText) findViewById(R.id.et_userName);
-        et_userName.setHint(getResources().getString(R.string.user_name));
+        userName_input_layout.setHint(getResources().getString(R.string.user_name));
         et_otp = (EditText) findViewById(R.id.et_otp);
-        et_otp.setHint(getResources().getString(R.string.enter_otp));
+        otp_input_layout.setHint(getResources().getString(R.string.enter_otp));
 
         Mint.initAndStartSession(this.getApplication(), "3e402768");
 
@@ -304,6 +306,20 @@ public class Login extends AppCompatActivity {
         getOTP.setVisibility(View.VISIBLE);
         login.setVisibility(View.GONE);
 
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        View view = getCurrentFocus();
+        if (view != null && (ev.getAction() == MotionEvent.ACTION_UP || ev.getAction() == MotionEvent.ACTION_MOVE) && view instanceof EditText && !view.getClass().getName().startsWith("android.webkit.")) {
+            int scrcoords[] = new int[2];
+            view.getLocationOnScreen(scrcoords);
+            float x = ev.getRawX() + view.getLeft() - scrcoords[0];
+            float y = ev.getRawY() + view.getTop() - scrcoords[1];
+            if (x < view.getLeft() || x > view.getRight() || y < view.getTop() || y > view.getBottom())
+                ((InputMethodManager)this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow((this.getWindow().getDecorView().getApplicationWindowToken()), 0);
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
     private void getCountries() {
