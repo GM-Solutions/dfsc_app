@@ -109,7 +109,7 @@
             android:id="@+id/sa_mobile"
             style="@android:style/Widget.Holo.Light.Spinner"
             android:layout_width="match_parent"
-            android:layout_height="55sp"
+            android:layout_height="58dp"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_16"

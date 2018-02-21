@@ -304,7 +304,7 @@
                 android:paddingRight="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_5"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
 
             <Button
                 android:id="@+id/custReg"
@@ -319,7 +319,6 @@
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_5"
-                android:text=""
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
