@@ -150,11 +150,6 @@ public class CustomerRegistration extends AppCompatActivity {
         et_cc = (EditText) findViewById(R.id.et_cc);
         et_date = (EditText) findViewById(R.id.et_date);
 
-        et_name.setHint(getResources().getString(R.string.name_head));
-        et_phone.setHint(getResources().getString(R.string.mobile_head));
-        et_cc.setHint(getResources().getString(R.string.code));
-        et_date.setHint(getResources().getString(R.string.ppd));
-
         search_bt = (ImageButton) findViewById(R.id.search_bt);
 
         id_input_layout = (TextInputLayout) findViewById(R.id.id_input_layout);
@@ -163,6 +158,11 @@ public class CustomerRegistration extends AppCompatActivity {
         cc_input_layout = (TextInputLayout) findViewById(R.id.cc_input_layout);
         date_input_layout = (TextInputLayout) findViewById(R.id.date_input_layout);
 
+        name_input_layout.setHint(getResources().getString(R.string.name_head));
+        phone_input_layout.setHint(getResources().getString(R.string.mobile_head));
+        cc_input_layout.setHint(getResources().getString(R.string.code));
+        date_input_layout.setHint(getResources().getString(R.string.ppd));
+
         submit = (Button) findViewById(R.id.submit);
         submit.setText(getResources().getString(R.string.submit));
 
@@ -170,7 +170,7 @@ public class CustomerRegistration extends AppCompatActivity {
 
         if (appPrefs.getCountry().matches("india")) {
             search.setHint(getResources().getString(R.string.search_chassis));
-            et_id.setHint(getResources().getString(R.string.chassis_head));
+            id_input_layout.setHint(getResources().getString(R.string.chassis_head));
             search_filter = "chassis";
             sa_mobile.setVisibility(View.GONE);
             mobile_sel = "";
@@ -183,7 +183,7 @@ public class CustomerRegistration extends AppCompatActivity {
         } else {
 
             search.setHint(getResources().getString(R.string.search_vehNo));
-            et_id.setHint(getResources().getString(R.string.textVehNo));
+            id_input_layout.setHint(getResources().getString(R.string.textVehNo));
             search_filter = "veh_reg_no";
             sa_mobile.setVisibility(View.VISIBLE);
             //id_input_layout.setHint("Vehicle Registration Number");
@@ -457,20 +457,20 @@ public class CustomerRegistration extends AppCompatActivity {
                                 } else {
                                     et_id.setText(arr.getJSONObject(0).getString("veh_reg_no"));
                                 }
-
+                                et_id.setEnabled(false);
 
                                 et_name.setText(arr.getJSONObject(0).getString("customer_name"));
                                 et_phone.setText(arr.getJSONObject(0).getString("mobile_no"));
 
                                 if (arr.getJSONObject(0).getString("register_customer").matches("true")) {
-                                    et_id.setEnabled(true);
+                                    //et_id.setEnabled(true);
                                     et_name.setEnabled(true);
                                     et_phone.setEnabled(true);
                                     et_date.setEnabled(true);
                                     sa_mobile.setEnabled(true);
                                     submit.setEnabled(true);
 
-                                    date_input_layout.setVisibility(View.VISIBLE);
+                                     date_input_layout.setVisibility(View.VISIBLE);
 
                                     /*
                                     if (appPrefs.getCountry().matches("uganda")) {

@@ -123,10 +123,10 @@ public class CheckFreeService extends AppCompatActivity {
         et_kms = (EditText) findViewById(R.id.et_kms);
         et_type = (EditText) findViewById(R.id.et_type);
 
-        et_kms.setHint(getResources().getString(R.string.kms));
-        et_type.setHint(getResources().getString(R.string.service_type));
-        et_custId.setHint(getResources().getString(R.string.cust_idd));
-        et_veh_reg_no.setHint(getResources().getString(R.string.veh_no));
+        kms_input_layout.setHint(getResources().getString(R.string.kms));
+        type_input_layout.setHint(getResources().getString(R.string.service_type));
+        custId_input_layout.setHint(getResources().getString(R.string.cust_idd));
+        veh_reg_no_input_layout.setHint(getResources().getString(R.string.veh_no));
 
         submit = (Button) findViewById(R.id.submit);
         submit.setText(getResources().getString(R.string.submit));

@@ -101,14 +101,14 @@ public class RiderRegistration extends AppCompatActivity {
         et_phone = (EditText) findViewById(R.id.et_phone);
         et_cc = (EditText) findViewById(R.id.et_cc);
 
-        et_name.setHint(getResources().getString(R.string.rider_name));
-        et_phone.setHint(getResources().getString(R.string.rider_mobile));
-        et_cc.setHint(getResources().getString(R.string.code));
-
         id_input_layout = (TextInputLayout) findViewById(R.id.id_input_layout);
         name_input_layout = (TextInputLayout) findViewById(R.id.name_input_layout);
         phone_input_layout = (TextInputLayout) findViewById(R.id.phone_input_layout);
         cc_input_layout = (TextInputLayout) findViewById(R.id.cc_input_layout);
+
+        name_input_layout.setHint(getResources().getString(R.string.rider_name));
+        phone_input_layout.setHint(getResources().getString(R.string.rider_mobile));
+        cc_input_layout.setHint(getResources().getString(R.string.code));
 
         et_id.setText(intent_veh_no);
 

@@ -97,8 +97,9 @@ public class CloseFreeService extends AppCompatActivity {
         spinnerError = (TextView) findViewById(R.id.spinnerError);
 
         submit.setText(getResources().getString(R.string.submit));
-        et_ucn.setHint(getResources().getString(R.string.ucn));
-        et_custId.setHint(getResources().getString(R.string.cust_idd));
+
+        ucn_input_layout.setHint(getResources().getString(R.string.ucn));
+        custId_input_layout.setHint(getResources().getString(R.string.cust_idd));
 
         sa_mobile = (Spinner) findViewById(R.id.sa_mobile);
         sa_mobile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
