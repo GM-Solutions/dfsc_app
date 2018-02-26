@@ -3,6 +3,7 @@ package ascent.com.dfsc.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -393,6 +394,9 @@ public class CheckFreeService extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         finish();
+                                        Intent i = new Intent(CheckFreeService.this, Drawer.class);
+                                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(i);
                                     }
                                 });
                                 //builder.setNegativeButton("Cancel", null);
