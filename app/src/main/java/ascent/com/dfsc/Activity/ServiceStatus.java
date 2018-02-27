@@ -8,6 +8,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -144,10 +145,13 @@ public class ServiceStatus extends AppCompatActivity {
 
                     if(appPrefs.getCountry().matches("uganda")){
                         search.setHint(getResources().getString(R.string.search_mobile2));
+                        search.setFilters(new InputFilter[]{new InputFilter.LengthFilter(9)});
                     }else if(appPrefs.getCountry().matches("kenya")){
                         search.setHint(getResources().getString(R.string.search_mobile2));
+                        search.setFilters(new InputFilter[]{new InputFilter.LengthFilter(9)});
                     }else if(appPrefs.getCountry().matches("india")){
                         search.setHint(getResources().getString(R.string.search_mobile1));
+                        search.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
                     }
 
                     cc.setText(appPrefs.getCode());
@@ -155,6 +159,7 @@ public class ServiceStatus extends AppCompatActivity {
                 } else {
                     cc.setVisibility(View.GONE);
                     search.setHint(getResources().getString(R.string.search));
+                    search.setFilters(new InputFilter[] {});
                 }
             }
 
