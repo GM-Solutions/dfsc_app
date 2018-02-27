@@ -91,6 +91,8 @@
     <string name="cust_failure_dialog"><b>Customer Registration Failed</b></string>
     <string name="code">Code</string>
     <string name="ppd">Product Purchase Date</string>
+    <string name="search_mobile1">Enter 10-digit mobile no.</string>
+    <string name="search_mobile2">Enter 9-digit mobile no.</string>
 
     <!--Rider registration page-->
     <string name="rider_reg_head">Rider Registration</string>

@@ -142,19 +142,19 @@ public class ServiceStatus extends AppCompatActivity {
                     cc.setVisibility(View.VISIBLE);
                     cc.setEnabled(false);
 
-                    /*
                     if(appPrefs.getCountry().matches("uganda")){
-                        cc.setText("255");
+                        search.setHint(getResources().getString(R.string.search_mobile2));
                     }else if(appPrefs.getCountry().matches("kenya")){
-                        cc.setText("254");
+                        search.setHint(getResources().getString(R.string.search_mobile2));
                     }else if(appPrefs.getCountry().matches("india")){
-                        cc.setText("91");
+                        search.setHint(getResources().getString(R.string.search_mobile1));
                     }
-                     */
+
                     cc.setText(appPrefs.getCode());
 
                 } else {
                     cc.setVisibility(View.GONE);
+                    search.setHint(getResources().getString(R.string.search));
                 }
             }
 

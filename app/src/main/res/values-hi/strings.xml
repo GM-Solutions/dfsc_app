@@ -91,6 +91,8 @@
     <string name="cust_failure_dialog"><b>ग्राहक पंजीकरण विफल</b></string>
     <string name="code">कोड</string>
     <string name="ppd">उत्पाद खरीद तिथि</string>
+    <string name="search_mobile1">10-अंकीय मोबाइल नंबर दर्ज करें</string>
+    <string name="search_mobile2">9-अंकों वाला मोबाइल नंबर दर्ज करें</string>
 
     <!--Rider registration page-->
     <string name="rider_reg_head">राइडर पंजीकरण</string>
