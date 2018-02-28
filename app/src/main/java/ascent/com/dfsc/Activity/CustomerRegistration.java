@@ -437,7 +437,6 @@ public class CustomerRegistration extends AppCompatActivity {
             }
         }
 
-
         return true;
     }
 
@@ -518,6 +517,8 @@ public class CustomerRegistration extends AppCompatActivity {
                                     submit.setEnabled(false);
                                     GradientDrawable bgShape = (GradientDrawable) submit.getBackground();
                                     bgShape.setColor(Color.parseColor("#717171"));
+
+                                    et_cc.setText(appPrefs.getCode());
                                 }
 
                             } else {
