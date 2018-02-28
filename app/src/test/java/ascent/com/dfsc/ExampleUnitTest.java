@@ -1,4 +1,4 @@
-package ascent.com.dfsc;
+package com.fsc;
 
 import org.junit.Test;
 

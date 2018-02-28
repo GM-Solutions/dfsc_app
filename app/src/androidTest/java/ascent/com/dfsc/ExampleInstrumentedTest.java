@@ -1,4 +1,4 @@
-package ascent.com.dfsc;
+package com.fsc;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("ascent.com.dfsc", appContext.getPackageName());
+        assertEquals("com.fsc", appContext.getPackageName());
     }
 }
