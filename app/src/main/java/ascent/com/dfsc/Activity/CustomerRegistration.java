@@ -190,7 +190,7 @@ public class CustomerRegistration extends AppCompatActivity {
             search_filter = "veh_reg_no";
             sa_mobile.setVisibility(View.VISIBLE);
             //id_input_layout.setHint("Vehicle Registration Number");
-            et_phone.setFilters(new InputFilter[]{new InputFilter.LengthFilter(12)});
+            et_phone.setFilters(new InputFilter[]{new InputFilter.LengthFilter(9)});
             dialog.setMessage(getResources().getString(R.string.please_wait));
             dialog.setCancelable(false);
             dialog.show();

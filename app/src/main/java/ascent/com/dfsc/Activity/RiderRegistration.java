@@ -127,7 +127,7 @@ public class RiderRegistration extends AppCompatActivity {
             et_phone.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
         } else {
             id_input_layout.setHint(getResources().getString(R.string.textVehNo));
-            et_phone.setFilters(new InputFilter[]{new InputFilter.LengthFilter(12)});
+            et_phone.setFilters(new InputFilter[]{new InputFilter.LengthFilter(9)});
         }
 
         sa_mobile = (Spinner) findViewById(R.id.sa_mobile);
@@ -160,7 +160,7 @@ public class RiderRegistration extends AppCompatActivity {
             et_cc.setText("91");
         }
 
-        dialog.setMessage("Please Wait..");
+        dialog.setMessage(getResources().getString(R.string.please_wait));
         dialog.setCancelable(false);
         dialog.show();
         getSAMobile();
