@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -133,7 +134,6 @@ public class SearchCustomerDetails extends AppCompatActivity {
                     cc.setVisibility(View.VISIBLE);
                     cc.setEnabled(false);
 
-
                     if(appPrefs.getCountry().matches("uganda")){
                         search.setHint(getResources().getString(R.string.search_mobile2));
                         search.setFilters(new InputFilter[]{new InputFilter.LengthFilter(9)});
@@ -145,12 +145,14 @@ public class SearchCustomerDetails extends AppCompatActivity {
                         search.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
                     }
 
+                    search.setInputType(InputType.TYPE_CLASS_NUMBER);
                     cc.setText(appPrefs.getCode());
 
                 } else {
                     cc.setVisibility(View.GONE);
                     search.setHint(getResources().getString(R.string.search));
                     search.setFilters(new InputFilter[] {});
+                    search.setInputType(InputType.TYPE_CLASS_TEXT);
                 }
             }
 

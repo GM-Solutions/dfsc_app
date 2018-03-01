@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -153,13 +154,14 @@ public class ServiceStatus extends AppCompatActivity {
                         search.setHint(getResources().getString(R.string.search_mobile1));
                         search.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
                     }
-
+                    search.setInputType(InputType.TYPE_CLASS_NUMBER);
                     cc.setText(appPrefs.getCode());
 
                 } else {
                     cc.setVisibility(View.GONE);
                     search.setHint(getResources().getString(R.string.search));
                     search.setFilters(new InputFilter[] {});
+                    search.setInputType(InputType.TYPE_CLASS_TEXT);
                 }
             }
 
