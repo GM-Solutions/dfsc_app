@@ -289,12 +289,21 @@ public class RiderRegistration extends AppCompatActivity {
                             JSONArray arr = obj.getJSONArray("employee_dtl");
 
                             final ArrayList<Mobile> list = new ArrayList<Mobile>();
-                            list.add(new Mobile("Select mobile number", "", getResources().getString(R.string.select_mobile_number)));
-                            for (int i = 0; i < arr.length(); i++) {
-                                list.add(new Mobile(arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname")
-                                        , arr.getJSONObject(i).getString("mobile_no"),
-                                        arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname") + " (" + arr.getJSONObject(i).getString("mobile_no") + ")"));
+                            if (arr.length() == 1) {
+                                list.add(new Mobile(arr.getJSONObject(0).getString("firstname") + " " + arr.getJSONObject(0).getString("lastname")
+                                        , arr.getJSONObject(0).getString("mobile_no"),
+                                        arr.getJSONObject(0).getString("user_code")+ " (" + arr.getJSONObject(0).getString("mobile_no") + ")"));
+
+                                sa_mobile.setEnabled(false);
+                            }else{
+                                list.add(new Mobile("Select mobile number", "", getResources().getString(R.string.select_mobile_number)));
+                                for (int i = 0; i < arr.length(); i++) {
+                                    list.add(new Mobile(arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname")
+                                            , arr.getJSONObject(i).getString("mobile_no"),
+                                            arr.getJSONObject(i).getString("user_code") + " (" + arr.getJSONObject(i).getString("mobile_no") + ")"));
+                                }
                             }
+
 
                             ArrayAdapter<Mobile> adapter = new ArrayAdapter<Mobile>(RiderRegistration.this,
                                     R.layout.list_item, R.id.name, list);

@@ -303,7 +303,7 @@ public class CheckFreeService extends AppCompatActivity {
                             if (arr.length() == 1) {
                                 list.add(new Mobile(arr.getJSONObject(0).getString("firstname") + " " + arr.getJSONObject(0).getString("lastname")
                                         , arr.getJSONObject(0).getString("mobile_no"),
-                                        arr.getJSONObject(0).getString("firstname") + " " + arr.getJSONObject(0).getString("lastname") + " (" + arr.getJSONObject(0).getString("mobile_no") + ")"));
+                                        arr.getJSONObject(0).getString("user_code")  + " (" + arr.getJSONObject(0).getString("mobile_no") + ")"));
                                 //sa_mobile.setSelection();
                                 sa_mobile.setEnabled(false);
                             } else {
@@ -311,7 +311,7 @@ public class CheckFreeService extends AppCompatActivity {
                                 for (int i = 0; i < arr.length(); i++) {
                                     list.add(new Mobile(arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname")
                                             , arr.getJSONObject(i).getString("mobile_no"),
-                                            arr.getJSONObject(i).getString("firstname") + " " + arr.getJSONObject(i).getString("lastname") + " (" + arr.getJSONObject(i).getString("mobile_no") + ")"));
+                                            arr.getJSONObject(i).getString("user_code") + " (" + arr.getJSONObject(i).getString("mobile_no") + ")"));
                                 }
                             }
 
