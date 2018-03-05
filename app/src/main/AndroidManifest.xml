@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fsc">
+    package="com.dfsc">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,14 +15,14 @@
         android:xlargeScreens="true" />
 
     <application
-        android:name=".Activity.MainApplication"
+        android:name="com.dfsc.Activity.MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
         <activity
-            android:name=".Activity.Splash"
+            android:name="com.dfsc.Activity.Splash"
             android:configChanges="orientation|locale"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -32,47 +32,47 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.Drawer"
+            android:name="com.dfsc.Activity.Drawer"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.SaRegistration"
+            android:name="com.dfsc.Activity.SaRegistration"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.AscRegistration"
+            android:name="com.dfsc.Activity.AscRegistration"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.SearchCustomerDetails"
+            android:name="com.dfsc.Activity.SearchCustomerDetails"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.Login"
+            android:name="com.dfsc.Activity.Login"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.ServiceStatus"
+            android:name="com.dfsc.Activity.ServiceStatus"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.CheckFreeService"
+            android:name="com.dfsc.Activity.CheckFreeService"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.CloseFreeService"
+            android:name="com.dfsc.Activity.CloseFreeService"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.CustomerRegistration"
+            android:name="com.dfsc.Activity.CustomerRegistration"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.RiderRegistration"
+            android:name="com.dfsc.Activity.RiderRegistration"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.MyProfile"
+            android:name="com.dfsc.Activity.MyProfile"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
     </application>
