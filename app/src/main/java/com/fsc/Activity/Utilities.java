@@ -50,7 +50,8 @@ import com.fsc.R;
 
 public class Utilities extends Activity {
 
-    public static String URL = "http://124.153.104.69:8063/api/";
+    //public static String URL = "http://124.153.104.69:8063/api/";
+    public static String URL = "http://bajajdfsc.gladminds.co/api/";
 
     public static void goToPage(Context paramContext, Class paramClass, Bundle paramBundle) {
         Intent localIntent = new Intent(paramContext, paramClass);
